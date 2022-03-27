@@ -1,0 +1,245 @@
+.product {
+  margin: 60px auto;
+  display: flex;
+  margin-top: 100px;
+  padding-right: 6% !important;
+  padding-left: 6% !important;
+  max-width: 1185px;
+}
+
+.image_social_container {
+  width: 50%;
+}
+
+.image_social_container image {
+  background-color: #f3f3f3;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  width: 100%;
+  position: relative;
+}
+
+.image img {
+  width: 100%;
+}
+
+.product .info {
+  /* display: -webkit-box; */
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  margin-left: 40px;
+  -webkit-box-flex: 1;
+  flex: 1;
+  flex-basis: 1e-9px;
+  position: relative;
+}
+
+.product .info h1 {
+  margin: 5px 0;
+  font-weight: 100;
+  font-family: sans-serif;
+  line-height: 1.3;
+  font-size: 20px;
+  color: #373737;
+  position: relative;
+  display: inline;
+}
+
+.product .info .tags span {
+  font-family: sans-Serif;
+  font-size: 14px;
+  color: #e85826;
+  position: relative;
+  padding-left: 8px;
+  padding-top: 1px;
+}
+
+.cuisine {
+  color: #e85826;
+  text-decoration: underline;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.product .info h2 {
+  margin: 12px 0 11px;
+}
+
+.product .info h2 span {
+  font-size: 18px;
+  color: #000;
+  font-weight: 500;
+  line-height: 1.28;
+}
+
+.order {
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 35px;
+  border: none;
+  font-family: sans-serif;
+  background-image: linear-gradient(to right, #fbcd6b, #f19e00);
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: center;
+  width: 110px;
+  position: relative;
+  margin: 0 !important;
+  border-radius: 20px;
+}
+
+.order div {
+  flex: 1;
+}
+
+.order_calc {
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 35px;
+
+  font-family: ProximaNova-Semibold, Helvetica, Arial, sans-serif;
+
+  -webkit-box-direction: normal;
+
+  cursor: pointer;
+  text-align: center;
+}
+
+.order_result {
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 35px;
+
+  font-family: ProximaNova-Semibold, Helvetica, Arial, sans-serif;
+
+  -webkit-box-direction: normal;
+
+  cursor: pointer;
+  text-align: center;
+  border-radius: 20px;
+  background-image: linear-gradient(to left, #fbcd6b, #f19e00);
+}
+
+.food_detail {
+  font-size: 18px;
+  line-height: 1.56;
+  color: #373737;
+  margin-top: 30px;
+  font-family: sans-serif;
+}
+
+.food_desc {
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 1.67;
+  color: #4a4a4a;
+}
+
+.food_tags {
+  -webkit-box-align: center;
+  align-items: center;
+  /* display: -webkit-box; */
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.food_tags .cuisines {
+  flex-wrap: wrap;
+  /* display: -webkit-box; */
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.cuisines_text {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #535657;
+  text-transform: uppercase;
+}
+
+.ingredients-title {
+  font-size: 18px;
+  line-height: 1.56;
+  color: #373737;
+  margin-top: 50px;
+  font-family: sans-serif;
+}
+
+.ingredients-list {
+  font-size: 15px;
+  line-height: 1.67;
+  color: #4a4a4a;
+  margin-top: 10px;
+}
+
+.side_menu {
+  animation: sidecart-slide-in 0.5s;
+  right: 0;
+  background: #f7f7f7;
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 0 0 3px 0 #d9d3c7;
+  z-index: 11 !important;
+}
+
+.cart {
+  position: relative;
+  padding: 0;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.cart .header {
+  padding: 16px 16px 24px;
+  color: #4a4a4a;
+}
+
+.header_cart {
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #4a4a4a;
+}
+
+.back {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  margin-top: -40px;
+  color: #4a4a4a;
+}
+
+.header_count {
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  color: #9b9b9b;
+}
