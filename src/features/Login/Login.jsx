@@ -34,6 +34,10 @@ const Modal = styled.div`
   width: 320px;
   box-sizing: border-box;
 `;
+
+const LoginWrapper = styled.div``;
+const SignupWrapper = styled.div``;
+
 const OauthWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -91,6 +95,10 @@ const InputWrapper = styled.div`
   position: relative;
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 const Input = styled.input`
   border: 1px solid rgba(209, 210, 217, 0.5);
@@ -101,26 +109,34 @@ const Input = styled.input`
   letter-spacing: 0.4px;
   box-sizing: border-box;
   &:focus {
-    outline: 1px solid #fbb100;
+    outline: 0px;
+    border: 1px solid #fbb100;
   }
   ::placeholder {
     color: #9b9b9b;
   }
 `;
+const InputContainer = styled.div`
+  position: relative;
+`;
 const ErrorMessage = styled.div`
-  outline: 1.5px solid red;
+  outline: 1.5px solid #f7295a;
   background: #fff;
-  color: #f00;
+  color: #f7295a;
   display: inline;
-  width: fit-content;
+  width: 180px;
+  text-align: center;
+  line-height: 18px;
   // height: 50%;
-  padding: 5px 20px;
+  padding: 5px;
   position: absolute;
   z-index: 11;
-  top: 8px;
-  left: 300px;
+  // top: 8px;
+  left: 292px;
   font-weight: bold;
   border-radius: 3px;
+  box-shadow: 0 5px 10px 5px rgb(164 175 182 / 21%),
+    0 2px 4px 0 rgb(164 175 182 / 43%);
 
   &:before {
     top: 20px;
@@ -149,7 +165,6 @@ const ErrorMessage = styled.div`
 `;
 const Button = styled.div`
   border-radius: 3px;
-  margin: 15px 0px;
   background: linear-gradient(to right, #f5914e, #e85826);
   height: 42px;
   border-radius: 3px;
@@ -170,10 +185,11 @@ const Hr = styled.hr`
   border: 0px solid red;
   border-bottom: 1px solid rgba(209, 210, 217, 0.5);
 `;
-const Signup = styled.div`
+const FeatureSwapWrapper = styled.div`
   display: inline-block;
 `;
-const SignupButton = styled.div`
+const FeatureSwapButton = styled.div`
+  cursor: pointer;
   display: inline-block;
   color: #e85826;
   font-weight: bold;
@@ -205,7 +221,7 @@ const OTPInput = styled(Input)`
   color: #9b9b9b;
 
   &:focus {
-    outline: 0px;
+    border: 0px;
     border-bottom: 1px solid #e85826;
   }
 `;
@@ -217,15 +233,22 @@ const Resend = styled.div`
   color: #e85826;
   font-weight: bold;
   font-size: 12px;
+  margin-top: 8px;
 `;
 
 const Login = () => {
-  const [OTP, setOTP] = useState(0);
+  const [feature, setFeature] = useState("login");
+  const [OTP, setOTP] = useState("");
   const [userOTP, setUserOTP] = useState("nnnnn");
   const [isOTPError, setIsOTPError] = useState(false);
   const [resendTime, setResendTime] = useState(15);
   const [OTPErrorMessage, setOTPErrorMessage] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const [signupfNameError, setSignupfNameError] = useState(false);
+  const [signuplNameError, setSignuplNameError] = useState(false);
+  const [signupphoneError, setSignupphoneError] = useState(false);
+  const [signupemailError, setSignupemailError] = useState(false);
+  const [signuppassError, setSignuppassError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [payload, setPayload] = useState({});
   const username = useRef();
@@ -235,6 +258,12 @@ const Login = () => {
   const otp3 = useRef();
   const otp4 = useRef();
   const otp5 = useRef();
+
+  const fName = useRef();
+  const lName = useRef();
+  const phone = useRef();
+  const email = useRef();
+  const pass = useRef();
 
   const validateUser = () => {
     var value = username.current.value;
@@ -251,14 +280,12 @@ const Login = () => {
       }
     }
     if (!isEmail && !isPhone) {
-      setIsError(true);
-      setErrorMessage("Invalid data entered.");
+      setLoginError(true);
+      setErrorMessage("Invalid data.");
     } else {
-      setIsError(false);
+      setLoginError(false);
       setErrorMessage("");
-      setPayload((state) => {
-        return { isEmail, isPhone, value: username.current.value };
-      });
+      setPayload({ isEmail, isPhone, value: username.current.value });
       sendOTP(payload);
     }
   };
@@ -272,13 +299,8 @@ const Login = () => {
         specialChar: false,
       })
     );
-      // otp1.current.value = "n";
-      // otp2.current.value = "n";
-      // otp3.current.value = "n";
-      // otp4.current.value = "n";
-      // otp5.current.value = "n";
     setUserOTP(() => {
-      return `nnn`;
+      return `nnnnn`;
     });
   };
 
@@ -320,11 +342,64 @@ const Login = () => {
     }
   };
 
+  const signup = () => {
+    let err = false;
+    console.log("Here");
+    if (fName.current.value === "") {
+      setSignupfNameError(true);
+      err = true;
+    } else {
+      setSignupfNameError(false);
+    }
+    if (
+      phone.current.value.length !== 10 ||
+      isNaN(Number(phone.current.value))
+    ) {
+      setSignupphoneError(true);
+      err = true;
+    } else {
+      setSignupphoneError(false);
+    }
+    if (!email.current.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      setSignupemailError(true);
+      err = true;
+    } else {
+      setSignupemailError(false);
+    }
+    if (pass.current.value.length < 4) {
+      setSignuppassError(true);
+      err = true;
+    } else {
+      setSignuppassError(false);
+    }
+    if (err) {
+      return;
+    }
+    window.alert("Sign up Success, click ok to continue");
+    resetModal();
+  };
+
+  const resetModal = () => {
+    setFeature("login");
+    setOTP("");
+    setUserOTP("nnnnn");
+    setIsOTPError(false);
+    setResendTime(15);
+    setOTPErrorMessage("");
+    setLoginError(false);
+    setErrorMessage("");
+    setPayload({});
+  };
+
   useEffect(() => {
     console.log(OTP);
-    if (OTP !== 0) {
+    if (OTP !== "") {
       const intervalid = setInterval(() => {
         setResendTime((prev) => {
+          if (prev <= 0) {
+            clearInterval(intervalid);
+            return prev;
+          }
           if (prev > 0) {
             return Number(prev) - 1;
           } else {
@@ -355,67 +430,171 @@ const Login = () => {
               </Link>
             </Oauth>
           </OauthWrapper>
-          <OrWrapper>OR</OrWrapper>
-          {OTP === 0 ? (
-            <InputWrapper>
-              <Input
-                placeholder="Mobile Number / Email ID"
-                autoFocus
-                ref={username}
-                onChange={() => {
-                  setIsError(false);
-                  setErrorMessage("");
-                }}
-              />
-              {isError ? <ErrorMessage>{errorMessage}</ErrorMessage> : <></>}
-              <Button onClick={validateUser}>Send OTP</Button>
-            </InputWrapper>
+          <OrWrapper>OR{feature === "login" ? "" : " USE EMAIL"}</OrWrapper>
+          {feature === "login" ? (
+            <LoginWrapper>
+              {OTP === "" ? (
+                <InputWrapper>
+                  <Input
+                    placeholder="Mobile Number / Email ID"
+                    autoFocus
+                    ref={username}
+                    onChange={() => {
+                      setLoginError(false);
+                      setErrorMessage("");
+                    }}
+                  />
+                  {loginError ? (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                  <Button onClick={validateUser}>Send OTP</Button>
+                </InputWrapper>
+              ) : (
+                <OTPWrapper>
+                  <VMessage>
+                    We have sent a verification code to {payload.value} via{" "}
+                    {payload.isEmail ? "Email" : "SMS"}. Please enter it below.
+                  </VMessage>
+                  <InputWrapper>
+                    <OTPContainer>
+                      <OTPInput
+                        autoFocus
+                        onChange={validateOTP}
+                        ref={otp1}
+                      ></OTPInput>
+                      <OTPInput onChange={validateOTP} ref={otp2}></OTPInput>
+                      <OTPInput onChange={validateOTP} ref={otp3}></OTPInput>
+                      <OTPInput onChange={validateOTP} ref={otp4}></OTPInput>
+                      <OTPInput onChange={validateOTP} ref={otp5}></OTPInput>
+                      {isOTPError ? (
+                        <ErrorMessage>{OTPErrorMessage}</ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </OTPContainer>
+                    <Button onClick={login}>Log In</Button>
+                  </InputWrapper>
+                  <ResendWrapper>
+                    {resendTime > 0 ? (
+                      <Resend>Resend code in 00:{resendTime}</Resend>
+                    ) : (
+                      <>
+                        <div style={{ margin: "8px 0px" }}>
+                          Didn't receive code?
+                        </div>
+                        <Resend style={{ cursor: "pointer" }} onClick={sendOTP}>
+                          Resend Code
+                        </Resend>
+                      </>
+                    )}
+                  </ResendWrapper>
+                </OTPWrapper>
+              )}
+            </LoginWrapper>
           ) : (
-            <OTPWrapper>
-              <VMessage>
-                We have sent a verification code to {payload.value} via{" "}
-                {payload.isEmail ? "Email" : "SMS"}. Please enter it below.
-              </VMessage>
-              <OTPContainer>
-                <OTPInput
-                  autoFocus
-                  onChange={validateOTP}
-                  ref={otp1}
-                ></OTPInput>
-                <OTPInput onChange={validateOTP} ref={otp2}></OTPInput>
-                <OTPInput onChange={validateOTP} ref={otp3}></OTPInput>
-                <OTPInput onChange={validateOTP} ref={otp4}></OTPInput>
-                <OTPInput onChange={validateOTP} ref={otp5}></OTPInput>
-                {isOTPError ? (
-                  <ErrorMessage>{OTPErrorMessage}</ErrorMessage>
-                ) : (
-                  <></>
-                )}
-              </OTPContainer>
-              <Button onClick={login}>Log In</Button>
-              <ResendWrapper>
-                {resendTime >= 0 ? (
-                  <Resend>Resend code in 00:{resendTime}</Resend>
-                ) : (
-                  <>
-                    <div style={{ marginBottom: "8px" }}>
-                      Didn't receive code?
-                    </div>
-                    <Resend style={{ cursor: "pointer" }} onClick={sendOTP}>
-                      Resend Code
-                    </Resend>
-                  </>
-                )}
-              </ResendWrapper>
-            </OTPWrapper>
+            <SignupWrapper>
+              <InputWrapper>
+                <InputContainer>
+                  <Input
+                    placeholder="First Name"
+                    autoFocus
+                    ref={fName}
+                    onChange={() => {
+                      setSignupfNameError(false);
+                    }}
+                  />
+                  {signupfNameError ? (
+                    <ErrorMessage>Please enter a valid first name</ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                </InputContainer>
+                <Input
+                  placeholder="Last Name"
+                  ref={lName}
+                  onChange={() => {
+                    setSignuplNameError(false);
+                  }}
+                />
+                {signuplNameError ? <ErrorMessage>Error</ErrorMessage> : <></>}
+                <InputContainer>
+                  <Input
+                    placeholder="10 Digit Mobile Number"
+                    ref={phone}
+                    onChange={() => {
+                      setSignupphoneError(false);
+                    }}
+                  />
+                  {signupphoneError ? (
+                    <ErrorMessage>
+                      Please enter a valid 10 digit mobile number.
+                    </ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                </InputContainer>
+                <InputContainer>
+                  <Input
+                    placeholder="Email"
+                    ref={email}
+                    onChange={() => {
+                      setSignupemailError(false);
+                    }}
+                  />
+                  {signupemailError ? (
+                    <ErrorMessage>
+                      Please enter a valid email address.
+                    </ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                </InputContainer>
+                <InputContainer>
+                  <Input
+                    placeholder="Password"
+                    ref={pass}
+                    onChange={() => {
+                      setSignuppassError(false);
+                    }}
+                  />
+                  {signuppassError ? (
+                    <ErrorMessage>
+                      Please enter a valid password. 4 characters min.
+                    </ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                </InputContainer>
+                <Button onClick={signup}>Sign up</Button>
+              </InputWrapper>
+            </SignupWrapper>
           )}
           <Hr />
-          <Signup>
-            Don't have an account?{" "}
-            <Link to="/">
-              <SignupButton>Sign up</SignupButton>
-            </Link>
-          </Signup>
+          {feature === "login" ? (
+            <FeatureSwapWrapper>
+              Don't have an account?{" "}
+              <FeatureSwapButton
+                onClick={() => {
+                  setFeature("signup");
+                }}
+              >
+                Sign up
+              </FeatureSwapButton>
+            </FeatureSwapWrapper>
+          ) : (
+            <FeatureSwapWrapper>
+              Already have an account?{" "}
+              <FeatureSwapButton
+                onClick={() => {
+                  setFeature("login");
+                }}
+              >
+                Log in
+              </FeatureSwapButton>
+            </FeatureSwapWrapper>
+          )}
         </Modal>
       </ModalWrapper>
     </>
