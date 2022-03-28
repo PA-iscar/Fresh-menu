@@ -236,7 +236,7 @@ const Resend = styled.div`
   margin-top: 8px;
 `;
 
-const Login = () => {
+const UserAuth = () => {
   const [feature, setFeature] = useState("login");
   const [OTP, setOTP] = useState("");
   const [userOTP, setUserOTP] = useState("nnnnn");
@@ -344,7 +344,6 @@ const Login = () => {
 
   const signup = () => {
     let err = false;
-    console.log("Here");
     if (fName.current.value === "") {
       setSignupfNameError(true);
       err = true;
@@ -601,4 +600,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserAuth;

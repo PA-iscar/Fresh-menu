@@ -1,10 +1,10 @@
 import React from "react";
-import Login from "../features/Login/Login";
+import UserAuth from "../features/UserAuth/UserAuth";
 
 const LoginPage = () => {
   return (
     <>
-      <Login />
+      <UserAuth />
     </>
   );
 };

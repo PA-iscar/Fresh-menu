@@ -1,10 +1,10 @@
 import React from "react";
-import LoginPage from "./Pages/LoginPage";
+import AuthPage from "./Pages/AuthPage";
 
 function App() {
   return (
     <>
-      <LoginPage />
+      <AuthPage />
     </>
   );
 }
