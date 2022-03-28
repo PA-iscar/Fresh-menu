@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
+import newOTP from "otp-generators";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,8 +28,8 @@ const ModalWrapper = styled.div`
 const Modal = styled.div`
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
   background: white;
-  padding: 34px 18px;
-  height: 299px;
+  padding: 34px 18px 18px;
+  height: fit-content;
   border-radius: 3px;
   width: 320px;
   box-sizing: border-box;
@@ -146,7 +147,7 @@ const ErrorMessage = styled.div`
     border-bottom: 4px solid transparent;
   }
 `;
-const Send = styled.div`
+const Button = styled.div`
   border-radius: 3px;
   margin: 15px 0px;
   background: linear-gradient(to right, #f5914e, #e85826);
@@ -178,12 +179,64 @@ const SignupButton = styled.div`
   font-weight: bold;
   text-decoration: underline;
 `;
+const OTPWrapper = styled.div`
+  // outline: 1px solid pink;
+`;
+const VMessage = styled.div`
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000;
+  line-height: 20px;
+`;
+const OTPContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  position: relative;
+`;
+const OTPInput = styled(Input)`
+  outline: 0px;
+  border: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  display: inline;
+  font-size: 20px;
+  text-align: center;
+  color: #9b9b9b;
+
+  &:focus {
+    outline: 0px;
+    border-bottom: 1px solid #e85826;
+  }
+`;
+const ResendWrapper = styled.div`
+  text-align: center;
+  font-size: 13px;
+`;
+const Resend = styled.div`
+  color: #e85826;
+  font-weight: bold;
+  font-size: 12px;
+`;
 
 const Login = () => {
+  const [OTP, setOTP] = useState(0);
+  const [userOTP, setUserOTP] = useState("nnnnn");
+  const [isOTPError, setIsOTPError] = useState(false);
+  const [resendTime, setResendTime] = useState(15);
+  const [OTPErrorMessage, setOTPErrorMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [payload, setPayload] = useState({});
   const username = useRef();
-  const handleClick = () => {
+
+  const otp1 = useRef();
+  const otp2 = useRef();
+  const otp3 = useRef();
+  const otp4 = useRef();
+  const otp5 = useRef();
+
+  const validateUser = () => {
     var value = username.current.value;
     const isEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
       ? true
@@ -197,25 +250,91 @@ const Login = () => {
         }
       }
     }
-
     if (!isEmail && !isPhone) {
       setIsError(true);
       setErrorMessage("Invalid data entered.");
     } else {
       setIsError(false);
       setErrorMessage("");
-      const payload = { isEmail, isPhone, value: username.current.value };
-      checkUser(payload);
+      setPayload((state) => {
+        return { isEmail, isPhone, value: username.current.value };
+      });
+      sendOTP(payload);
     }
   };
 
-  const checkUser = (payload) => {
-    console.log(payload);
-    setIsError(true);
-    setErrorMessage("User not registered");
+  const sendOTP = (payload) => {
+    setResendTime(15);
+    setOTP(
+      newOTP.generate(5, {
+        alphabets: false,
+        upperCase: false,
+        specialChar: false,
+      })
+    );
+      // otp1.current.value = "n";
+      // otp2.current.value = "n";
+      // otp3.current.value = "n";
+      // otp4.current.value = "n";
+      // otp5.current.value = "n";
+    setUserOTP(() => {
+      return `nnn`;
+    });
   };
 
-  useEffect(() => {}, [isError]);
+  const validateOTP = () => {
+    if (otp1.current.value !== "") {
+      otp2.current.focus();
+    }
+    if (otp2.current.value !== "") {
+      otp3.current.focus();
+    }
+    if (otp3.current.value !== "") {
+      otp4.current.focus();
+    }
+    if (otp4.current.value !== "") {
+      otp5.current.focus();
+    }
+    if (otp5.current.value !== "") {
+      otp5.current.blur();
+    }
+    setIsOTPError(false);
+    setOTPErrorMessage("");
+    setUserOTP(() => {
+      return `${otp1.current.value ? otp1.current.value : "n"}${
+        otp2.current.value ? otp2.current.value : "n"
+      }${otp3.current.value ? otp3.current.value : "n"}${
+        otp4.current.value ? otp4.current.value : "n"
+      }${otp5.current.value ? otp5.current.value : "n"}`;
+    });
+  };
+
+  const login = () => {
+    if (OTP !== userOTP) {
+      setIsOTPError(true);
+      setOTPErrorMessage("Invalid OTP");
+    } else {
+      setIsOTPError(false);
+      setOTPErrorMessage("");
+      window.alert("Loggedin");
+    }
+  };
+
+  useEffect(() => {
+    console.log(OTP);
+    if (OTP !== 0) {
+      const intervalid = setInterval(() => {
+        setResendTime((prev) => {
+          if (prev > 0) {
+            return Number(prev) - 1;
+          } else {
+            clearInterval(intervalid);
+          }
+        });
+      }, 1000);
+      return () => clearInterval(intervalid);
+    }
+  }, [OTP]);
 
   return (
     <>
@@ -237,19 +356,59 @@ const Login = () => {
             </Oauth>
           </OauthWrapper>
           <OrWrapper>OR</OrWrapper>
-          <InputWrapper>
-            <Input
-              placeholder="Mobile Number / Email ID"
-              autoFocus
-              ref={username}
-              onChange={() => {
-                setIsError(false);
-                setErrorMessage("");
-              }}
-            />
-            {isError ? <ErrorMessage>{errorMessage}</ErrorMessage> : <></>}
-          </InputWrapper>
-          <Send onClick={handleClick}>Send OTP</Send>
+          {OTP === 0 ? (
+            <InputWrapper>
+              <Input
+                placeholder="Mobile Number / Email ID"
+                autoFocus
+                ref={username}
+                onChange={() => {
+                  setIsError(false);
+                  setErrorMessage("");
+                }}
+              />
+              {isError ? <ErrorMessage>{errorMessage}</ErrorMessage> : <></>}
+              <Button onClick={validateUser}>Send OTP</Button>
+            </InputWrapper>
+          ) : (
+            <OTPWrapper>
+              <VMessage>
+                We have sent a verification code to {payload.value} via{" "}
+                {payload.isEmail ? "Email" : "SMS"}. Please enter it below.
+              </VMessage>
+              <OTPContainer>
+                <OTPInput
+                  autoFocus
+                  onChange={validateOTP}
+                  ref={otp1}
+                ></OTPInput>
+                <OTPInput onChange={validateOTP} ref={otp2}></OTPInput>
+                <OTPInput onChange={validateOTP} ref={otp3}></OTPInput>
+                <OTPInput onChange={validateOTP} ref={otp4}></OTPInput>
+                <OTPInput onChange={validateOTP} ref={otp5}></OTPInput>
+                {isOTPError ? (
+                  <ErrorMessage>{OTPErrorMessage}</ErrorMessage>
+                ) : (
+                  <></>
+                )}
+              </OTPContainer>
+              <Button onClick={login}>Log In</Button>
+              <ResendWrapper>
+                {resendTime >= 0 ? (
+                  <Resend>Resend code in 00:{resendTime}</Resend>
+                ) : (
+                  <>
+                    <div style={{ marginBottom: "8px" }}>
+                      Didn't receive code?
+                    </div>
+                    <Resend style={{ cursor: "pointer" }} onClick={sendOTP}>
+                      Resend Code
+                    </Resend>
+                  </>
+                )}
+              </ResendWrapper>
+            </OTPWrapper>
+          )}
           <Hr />
           <Signup>
             Don't have an account?{" "}
