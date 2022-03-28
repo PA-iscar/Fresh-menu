@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
@@ -86,6 +86,11 @@ const OrWrapper = styled.div`
     margin-left: 20px;
   }
 `;
+const InputWrapper = styled.div`
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+`;
 const Input = styled.input`
   border: 1px solid rgba(209, 210, 217, 0.5);
   border-radius: 3px;
@@ -101,13 +106,53 @@ const Input = styled.input`
     color: #9b9b9b;
   }
 `;
+const ErrorMessage = styled.div`
+  outline: 1.5px solid red;
+  background: #fff;
+  color: #f00;
+  display: inline;
+  width: fit-content;
+  // height: 50%;
+  padding: 5px 20px;
+  position: absolute;
+  z-index: 11;
+  top: 8px;
+  left: 300px;
+  font-weight: bold;
+  border-radius: 3px;
+
+  &:before {
+    top: 20px;
+    right: 100%;
+    width: 0;
+    position: absolute;
+    height: 0;
+    content: "";
+    margin-top: -11px;
+    border-right: 5px solid #f7295a;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  &:after {
+    top: 20px;
+    right: 100%;
+    width: 0;
+    position: absolute;
+    height: 0;
+    content: "";
+    margin-top: -10px;
+    border-right: 4px solid #fff;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+`;
 const Send = styled.div`
   border-radius: 3px;
   margin: 15px 0px;
   background: linear-gradient(to right, #f5914e, #e85826);
   height: 42px;
   border-radius: 3px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #fff;
   display: flex;
@@ -135,11 +180,43 @@ const SignupButton = styled.div`
 `;
 
 const Login = () => {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const username = useRef();
-  const handleChange = () => {
-    console.log(username.current.value);
-    // username.current.value = "";
+  const handleClick = () => {
+    var value = username.current.value;
+    const isEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+      ? true
+      : false;
+    var isPhone = false;
+    if (!isEmail) {
+      if (value.length === 10) {
+        value = Number(value);
+        if (!isNaN(value)) {
+          isPhone = true;
+        }
+      }
+    }
+
+    if (!isEmail && !isPhone) {
+      setIsError(true);
+      setErrorMessage("Invalid data entered.");
+    } else {
+      setIsError(false);
+      setErrorMessage("");
+      const payload = { isEmail, isPhone, value: username.current.value };
+      checkUser(payload);
+    }
   };
+
+  const checkUser = (payload) => {
+    console.log(payload);
+    setIsError(true);
+    setErrorMessage("User not registered");
+  };
+
+  useEffect(() => {}, [isError]);
+
   return (
     <>
       <GlobalStyle />
@@ -160,12 +237,19 @@ const Login = () => {
             </Oauth>
           </OauthWrapper>
           <OrWrapper>OR</OrWrapper>
-          <Input
-            placeholder="Mobile Number / Email ID"
-            autoFocus
-            ref={username}
-          ></Input>
-          <Send onClick={handleChange}>Send OTP</Send>
+          <InputWrapper>
+            <Input
+              placeholder="Mobile Number / Email ID"
+              autoFocus
+              ref={username}
+              onChange={() => {
+                setIsError(false);
+                setErrorMessage("");
+              }}
+            />
+            {isError ? <ErrorMessage>{errorMessage}</ErrorMessage> : <></>}
+          </InputWrapper>
+          <Send onClick={handleClick}>Send OTP</Send>
           <Hr />
           <Signup>
             Don't have an account?{" "}
