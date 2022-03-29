@@ -52,6 +52,7 @@ const Oauth = styled.div`
   width: 100%;
   height: 30px;
   border-radius: 2px;
+  cursor: pointer;
 `;
 const Facebook = styled.div`
   background: #4f73bb;
@@ -476,9 +477,15 @@ const UserAuth = () => {
                   </Link>
                 </Oauth>
                 <Oauth>
-                  <Link to="/">
-                    <Google src="./google_signin.png" alt="" />
-                  </Link>
+                  <Google
+                    src="./google_signin.png"
+                    alt=""
+                    onClick={() => {
+                      window.location.assign(
+                        "http://localhost:8000/auth/google"
+                      );
+                    }}
+                  />
                 </Oauth>
               </OauthWrapper>
               <OrWrapper>OR{feature === "login" ? "" : " USE EMAIL"}</OrWrapper>
