@@ -4,7 +4,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 // import newOTP from "otp-generators";
-import { checkUserAPI, signupUserAPI } from "./auth.api";
+import { checkUserAPI, loginUserAPI, signupUserAPI } from "./auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSignup } from "./signup.slice";
 import { resetCheck } from "./check.slice";
@@ -267,6 +267,11 @@ const UserAuth = () => {
   const checkLoading = useSelector((state) => state.check.isLoading);
   const loginCheckError = useSelector((state) => state.check.checkError);
   const OTP = useSelector((state) => state.check.OTP);
+  const userID = useSelector((state) => state.check.userID);
+
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+  const loginLoading = useSelector((state) => state.login.isLoading);
+  const loginError = useSelector((state) => state.login.isError);
 
   const otp1 = useRef();
   const otp2 = useRef();
@@ -354,14 +359,8 @@ const UserAuth = () => {
   };
 
   const login = () => {
-    if (OTP !== userOTP) {
-      setIsOTPError(true);
-      setOTPErrorMessage("Invalid OTP");
-    } else {
-      setIsOTPError(false);
-      setOTPErrorMessage("");
-      window.alert("Loggedin");
-    }
+    const loginAction = loginUserAPI({ id: userID, userOTP });
+    dispatch(loginAction);
   };
 
   const resetModal = () => {
@@ -417,6 +416,18 @@ const UserAuth = () => {
 
     dispatch(signupAction);
   };
+
+  useEffect(() => {
+    if (loginError) {
+      setIsOTPError(true);
+      setOTPErrorMessage("Invalid OTP");
+    }
+    if (isLoggedin) {
+      setIsOTPError(false);
+      setOTPErrorMessage("");
+      window.alert("logged in");
+    }
+  }, [loginError, isLoggedin]);
 
   useEffect(() => {
     if (isSignedup) {
@@ -540,7 +551,9 @@ const UserAuth = () => {
                             <></>
                           )}
                         </OTPContainer>
-                        <Button onClick={login}>Log In</Button>
+                        <Button onClick={login}>
+                          {loginLoading ? "...checking OTP" : "Log In"}
+                        </Button>
                       </InputWrapper>
                       <ResendWrapper>
                         {resendTime > 0 ? (
