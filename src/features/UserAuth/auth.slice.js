@@ -1,23 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signupUserAPI } from "./data.api";
+import { signupUserAPI } from "./auth.api";
 
 const signupSlice = createSlice({
   name: "signup",
-  initialState: {},
-  reducers: {},
+  initialState: {
+    isSignedup: false,
+    isLoading: false,
+    signupError: "",
+  },
+  reducers: {
+    resetSignup(state) {
+      state.isSignedup = false;
+      state.isLoading = false;
+      state.signupError = "";
+    },
+  },
   extraReducers(builder) {
     builder
-      .addCase(signupUserAPI.pending, () => {
-        window.alert("Signup Loading...");
+      .addCase(signupUserAPI.pending, (state, action) => {
+        state.isSignedup = false;
+        state.isLoading = true;
+        state.signupError = "";
       })
-      .addCase(signupUserAPI.fulfilled, () => {
-        window.alert("Signup Successful");
+      .addCase(signupUserAPI.fulfilled, (state, action) => {
+        state.isSignedup = true;
+        state.isLoading = false;
+        state.signupError = "";
       })
 
-      .addCase(signupUserAPI.rejected, () => {
-        window.alert("Signup Failed");
+      .addCase(signupUserAPI.rejected, (state, action) => {
+        state.isSignedup = false;
+        state.isLoading = false;
+        state.signupError = "Could not signup";
       });
   },
 });
 
+export const { resetSignup } = signupSlice.actions;
 export default signupSlice.reducer;

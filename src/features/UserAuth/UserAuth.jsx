@@ -5,7 +5,8 @@ import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 import newOTP from "otp-generators";
 import { signupUserAPI } from "./auth.api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetSignup } from "./auth.slice";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -256,6 +257,9 @@ const UserAuth = () => {
   const username = useRef();
 
   const dispatch = useDispatch();
+  const isSignedup = useSelector((state) => state.signup.isSignedup);
+  const isLoading = useSelector((state) => state.signup.isLoading);
+  const signupError = useSelector((state) => state.signup.signupError);
 
   const otp1 = useRef();
   const otp2 = useRef();
@@ -346,6 +350,18 @@ const UserAuth = () => {
     }
   };
 
+  const resetModal = () => {
+    setFeature("login");
+    setOTP("");
+    setUserOTP("nnnnn");
+    setIsOTPError(false);
+    setResendTime(15);
+    setOTPErrorMessage("");
+    setLoginError(false);
+    setErrorMessage("");
+    setPayload({});
+  };
+
   const signup = () => {
     let err = false;
     if (fName.current.value === "") {
@@ -385,22 +401,22 @@ const UserAuth = () => {
       email: email.current.value,
       password: pass.current.value,
     });
-    dispatch(signupAction);
-    window.alert("Sign up Success, click ok to continue");
-    resetModal();
-  };
 
-  const resetModal = () => {
-    setFeature("login");
-    setOTP("");
-    setUserOTP("nnnnn");
-    setIsOTPError(false);
-    setResendTime(15);
-    setOTPErrorMessage("");
-    setLoginError(false);
-    setErrorMessage("");
-    setPayload({});
+    dispatch(signupAction);
+    // window.alert("Sign up Success, click ok to continue");
+    // resetModal();
   };
+  if (isSignedup) {
+    const resetSignupAction = resetSignup();
+    dispatch(resetSignupAction);
+    window.alert("Signup Success, use OTP to login");
+    resetModal();
+  }
+  if (signupError) {
+    const resetSignupAction = resetSignup();
+    dispatch(resetSignupAction);
+    window.alert("Signup Failed");
+  }
 
   useEffect(() => {
     console.log(OTP);
@@ -522,14 +538,20 @@ const UserAuth = () => {
                     <></>
                   )}
                 </InputContainer>
-                <Input
-                  placeholder="Last Name"
-                  ref={lName}
-                  onChange={() => {
-                    setSignuplNameError(false);
-                  }}
-                />
-                {signuplNameError ? <ErrorMessage>Error</ErrorMessage> : <></>}
+                <InputContainer>
+                  <Input
+                    placeholder="Last Name"
+                    ref={lName}
+                    onChange={() => {
+                      setSignuplNameError(false);
+                    }}
+                  />
+                  {signuplNameError ? (
+                    <ErrorMessage>Error</ErrorMessage>
+                  ) : (
+                    <></>
+                  )}
+                </InputContainer>
                 <InputContainer>
                   <Input
                     placeholder="10 Digit Mobile Number"
@@ -578,7 +600,9 @@ const UserAuth = () => {
                     <></>
                   )}
                 </InputContainer>
-                <Button onClick={signup}>Sign up</Button>
+                <Button onClick={signup}>
+                  {isLoading ? "...Signing in" : "Sign up"}
+                </Button>
               </InputWrapper>
             </SignupWrapper>
           )}
