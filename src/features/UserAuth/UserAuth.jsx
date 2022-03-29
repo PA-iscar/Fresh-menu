@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import newOTP from "otp-generators";
 import { signupUserAPI } from "./auth.api";
 import { useDispatch, useSelector } from "react-redux";
-import { resetSignup } from "./auth.slice";
+import { resetSignup } from "./signup.slice";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -241,6 +241,7 @@ const Resend = styled.div`
 
 const UserAuth = () => {
   const [feature, setFeature] = useState("login");
+
   const [OTP, setOTP] = useState("");
   const [userOTP, setUserOTP] = useState("nnnnn");
   const [isOTPError, setIsOTPError] = useState(false);
@@ -403,8 +404,6 @@ const UserAuth = () => {
     });
 
     dispatch(signupAction);
-    // window.alert("Sign up Success, click ok to continue");
-    // resetModal();
   };
   if (isSignedup) {
     const resetSignupAction = resetSignup();
@@ -440,198 +439,222 @@ const UserAuth = () => {
 
   return (
     <>
-      <GlobalStyle />
-      <ModalWrapper>
-        <Modal>
-          <OauthWrapper>
-            <Oauth>
-              <Link to="/">
-                <Facebook>
-                  <FaFacebookF fill="white" />
-                </Facebook>
-              </Link>
-            </Oauth>
-            <Oauth>
-              <Link to="/">
-                <Google src="./google_signin.png" alt="" />
-              </Link>
-            </Oauth>
-          </OauthWrapper>
-          <OrWrapper>OR{feature === "login" ? "" : " USE EMAIL"}</OrWrapper>
-          {feature === "login" ? (
-            <LoginWrapper>
-              {OTP === "" ? (
-                <InputWrapper>
-                  <Input
-                    placeholder="Mobile Number / Email ID"
-                    autoFocus
-                    ref={username}
-                    onChange={() => {
-                      setLoginError(false);
-                      setErrorMessage("");
-                    }}
-                  />
-                  {loginError ? (
-                    <ErrorMessage>{errorMessage}</ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                  <Button onClick={validateUser}>Send OTP</Button>
-                </InputWrapper>
-              ) : (
-                <OTPWrapper>
-                  <VMessage>
-                    We have sent a verification code to {payload.value} via{" "}
-                    {payload.isEmail ? "Email" : "SMS"}. Please enter it below.
-                  </VMessage>
-                  <InputWrapper>
-                    <OTPContainer>
-                      <OTPInput
+      {feature === "login" || feature === "signup" ? (
+        <>
+          <GlobalStyle />
+          <ModalWrapper>
+            <Modal>
+              <OauthWrapper>
+                <Oauth>
+                  <Link to="/">
+                    <Facebook>
+                      <FaFacebookF fill="white" />
+                    </Facebook>
+                  </Link>
+                </Oauth>
+                <Oauth>
+                  <Link to="/">
+                    <Google src="./google_signin.png" alt="" />
+                  </Link>
+                </Oauth>
+              </OauthWrapper>
+              <OrWrapper>OR{feature === "login" ? "" : " USE EMAIL"}</OrWrapper>
+              {feature === "login" ? (
+                <LoginWrapper>
+                  {OTP === "" ? (
+                    <InputWrapper>
+                      <Input
+                        placeholder="Mobile Number / Email ID"
                         autoFocus
-                        onChange={validateOTP}
-                        ref={otp1}
-                      ></OTPInput>
-                      <OTPInput onChange={validateOTP} ref={otp2}></OTPInput>
-                      <OTPInput onChange={validateOTP} ref={otp3}></OTPInput>
-                      <OTPInput onChange={validateOTP} ref={otp4}></OTPInput>
-                      <OTPInput onChange={validateOTP} ref={otp5}></OTPInput>
-                      {isOTPError ? (
-                        <ErrorMessage>{OTPErrorMessage}</ErrorMessage>
+                        ref={username}
+                        onChange={() => {
+                          setLoginError(false);
+                          setErrorMessage("");
+                        }}
+                      />
+                      {loginError ? (
+                        <ErrorMessage>{errorMessage}</ErrorMessage>
                       ) : (
                         <></>
                       )}
-                    </OTPContainer>
-                    <Button onClick={login}>Log In</Button>
+                      <Button onClick={validateUser}>Send OTP</Button>
+                    </InputWrapper>
+                  ) : (
+                    <OTPWrapper>
+                      <VMessage>
+                        We have sent a verification code to {payload.value} via{" "}
+                        {payload.isEmail ? "Email" : "SMS"}. Please enter it
+                        below.
+                      </VMessage>
+                      <InputWrapper>
+                        <OTPContainer>
+                          <OTPInput
+                            autoFocus
+                            onChange={validateOTP}
+                            ref={otp1}
+                          ></OTPInput>
+                          <OTPInput
+                            onChange={validateOTP}
+                            ref={otp2}
+                          ></OTPInput>
+                          <OTPInput
+                            onChange={validateOTP}
+                            ref={otp3}
+                          ></OTPInput>
+                          <OTPInput
+                            onChange={validateOTP}
+                            ref={otp4}
+                          ></OTPInput>
+                          <OTPInput
+                            onChange={validateOTP}
+                            ref={otp5}
+                          ></OTPInput>
+                          {isOTPError ? (
+                            <ErrorMessage>{OTPErrorMessage}</ErrorMessage>
+                          ) : (
+                            <></>
+                          )}
+                        </OTPContainer>
+                        <Button onClick={login}>Log In</Button>
+                      </InputWrapper>
+                      <ResendWrapper>
+                        {resendTime > 0 ? (
+                          <Resend>Resend code in 00:{resendTime}</Resend>
+                        ) : (
+                          <>
+                            <div style={{ margin: "8px 0px" }}>
+                              Didn't receive code?
+                            </div>
+                            <Resend
+                              style={{ cursor: "pointer" }}
+                              onClick={sendOTP}
+                            >
+                              Resend Code
+                            </Resend>
+                          </>
+                        )}
+                      </ResendWrapper>
+                    </OTPWrapper>
+                  )}
+                </LoginWrapper>
+              ) : (
+                <SignupWrapper>
+                  <InputWrapper>
+                    <InputContainer>
+                      <Input
+                        placeholder="First Name"
+                        autoFocus
+                        ref={fName}
+                        onChange={() => {
+                          setSignupfNameError(false);
+                        }}
+                      />
+                      {signupfNameError ? (
+                        <ErrorMessage>
+                          Please enter a valid first name
+                        </ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </InputContainer>
+                    <InputContainer>
+                      <Input
+                        placeholder="Last Name"
+                        ref={lName}
+                        onChange={() => {
+                          setSignuplNameError(false);
+                        }}
+                      />
+                      {signuplNameError ? (
+                        <ErrorMessage>Error</ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </InputContainer>
+                    <InputContainer>
+                      <Input
+                        placeholder="10 Digit Mobile Number"
+                        ref={phone}
+                        onChange={() => {
+                          setSignupphoneError(false);
+                        }}
+                      />
+                      {signupphoneError ? (
+                        <ErrorMessage>
+                          Please enter a valid 10 digit mobile number.
+                        </ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </InputContainer>
+                    <InputContainer>
+                      <Input
+                        placeholder="Email"
+                        ref={email}
+                        onChange={() => {
+                          setSignupemailError(false);
+                        }}
+                      />
+                      {signupemailError ? (
+                        <ErrorMessage>
+                          Please enter a valid email address.
+                        </ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </InputContainer>
+                    <InputContainer>
+                      <Input
+                        placeholder="Password"
+                        ref={pass}
+                        onChange={() => {
+                          setSignuppassError(false);
+                        }}
+                      />
+                      {signuppassError ? (
+                        <ErrorMessage>
+                          Please enter a valid password. 4 characters min.
+                        </ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                    </InputContainer>
+                    <Button onClick={signup}>
+                      {isLoading ? "...Signing in" : "Sign up"}
+                    </Button>
                   </InputWrapper>
-                  <ResendWrapper>
-                    {resendTime > 0 ? (
-                      <Resend>Resend code in 00:{resendTime}</Resend>
-                    ) : (
-                      <>
-                        <div style={{ margin: "8px 0px" }}>
-                          Didn't receive code?
-                        </div>
-                        <Resend style={{ cursor: "pointer" }} onClick={sendOTP}>
-                          Resend Code
-                        </Resend>
-                      </>
-                    )}
-                  </ResendWrapper>
-                </OTPWrapper>
+                </SignupWrapper>
               )}
-            </LoginWrapper>
-          ) : (
-            <SignupWrapper>
-              <InputWrapper>
-                <InputContainer>
-                  <Input
-                    placeholder="First Name"
-                    autoFocus
-                    ref={fName}
-                    onChange={() => {
-                      setSignupfNameError(false);
+              <Hr />
+              {feature === "login" ? (
+                <FeatureSwapWrapper>
+                  Don't have an account?{" "}
+                  <FeatureSwapButton
+                    onClick={() => {
+                      setFeature("signup");
                     }}
-                  />
-                  {signupfNameError ? (
-                    <ErrorMessage>Please enter a valid first name</ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                </InputContainer>
-                <InputContainer>
-                  <Input
-                    placeholder="Last Name"
-                    ref={lName}
-                    onChange={() => {
-                      setSignuplNameError(false);
+                  >
+                    Sign up
+                  </FeatureSwapButton>
+                </FeatureSwapWrapper>
+              ) : (
+                <FeatureSwapWrapper>
+                  Already have an account?{" "}
+                  <FeatureSwapButton
+                    onClick={() => {
+                      setFeature("login");
                     }}
-                  />
-                  {signuplNameError ? (
-                    <ErrorMessage>Error</ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                </InputContainer>
-                <InputContainer>
-                  <Input
-                    placeholder="10 Digit Mobile Number"
-                    ref={phone}
-                    onChange={() => {
-                      setSignupphoneError(false);
-                    }}
-                  />
-                  {signupphoneError ? (
-                    <ErrorMessage>
-                      Please enter a valid 10 digit mobile number.
-                    </ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                </InputContainer>
-                <InputContainer>
-                  <Input
-                    placeholder="Email"
-                    ref={email}
-                    onChange={() => {
-                      setSignupemailError(false);
-                    }}
-                  />
-                  {signupemailError ? (
-                    <ErrorMessage>
-                      Please enter a valid email address.
-                    </ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                </InputContainer>
-                <InputContainer>
-                  <Input
-                    placeholder="Password"
-                    ref={pass}
-                    onChange={() => {
-                      setSignuppassError(false);
-                    }}
-                  />
-                  {signuppassError ? (
-                    <ErrorMessage>
-                      Please enter a valid password. 4 characters min.
-                    </ErrorMessage>
-                  ) : (
-                    <></>
-                  )}
-                </InputContainer>
-                <Button onClick={signup}>
-                  {isLoading ? "...Signing in" : "Sign up"}
-                </Button>
-              </InputWrapper>
-            </SignupWrapper>
-          )}
-          <Hr />
-          {feature === "login" ? (
-            <FeatureSwapWrapper>
-              Don't have an account?{" "}
-              <FeatureSwapButton
-                onClick={() => {
-                  setFeature("signup");
-                }}
-              >
-                Sign up
-              </FeatureSwapButton>
-            </FeatureSwapWrapper>
-          ) : (
-            <FeatureSwapWrapper>
-              Already have an account?{" "}
-              <FeatureSwapButton
-                onClick={() => {
-                  setFeature("login");
-                }}
-              >
-                Log in
-              </FeatureSwapButton>
-            </FeatureSwapWrapper>
-          )}
-        </Modal>
-      </ModalWrapper>
+                  >
+                    Log in
+                  </FeatureSwapButton>
+                </FeatureSwapWrapper>
+              )}
+            </Modal>
+          </ModalWrapper>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
