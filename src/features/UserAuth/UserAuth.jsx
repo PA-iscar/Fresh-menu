@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { checkUserAPI, signupUserAPI } from "./auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSignup } from "./signup.slice";
-import { resetCheck } from "./login.slice";
+import { resetCheck } from "./check.slice";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -302,14 +302,13 @@ const UserAuth = () => {
       setErrorMessage("");
       const val = isEmail
         ? { query: "email", value: username.current.value }
-        : { query: "phone", value: username.current.value };
+        : { query: "mobileNumber", value: username.current.value };
       setPayload(val);
       getOTP(val);
     }
   };
 
   const getOTP = (payload) => {
-    console.log("here");
     resetCheck();
     const checkUserAction = checkUserAPI(payload);
     dispatch(checkUserAction);
@@ -418,20 +417,20 @@ const UserAuth = () => {
 
     dispatch(signupAction);
   };
-  if (isSignedup) {
-    const resetSignupAction = resetSignup();
-    dispatch(resetSignupAction);
-    window.alert("Signup Success, use OTP to login");
-    resetModal();
-  }
-  if (signupError) {
-    const resetSignupAction = resetSignup();
-    dispatch(resetSignupAction);
-    window.alert("Signup Failed");
-  }
 
   useEffect(() => {
-    console.log(OTP);
+    if (isSignedup) {
+      resetModal();
+      window.alert("Signup Success, use OTP to login");
+    }
+    if (signupError) {
+      window.alert(signupError);
+    }
+    const resetSignupAction = resetSignup();
+    dispatch(resetSignupAction);
+  }, [isSignedup, signupError, dispatch]);
+
+  useEffect(() => {
     if (OTP !== "") {
       const intervalid = setInterval(() => {
         setResendTime((prev) => {
@@ -484,8 +483,10 @@ const UserAuth = () => {
                           setUserName(username.current.value);
                           setLoginDataError(false);
                           setErrorMessage("");
-                          const checkResetAction = resetCheck();
-                          dispatch(checkResetAction);
+                          if (loginCheckError) {
+                            const checkResetAction = resetCheck();
+                            dispatch(checkResetAction);
+                          }
                         }}
                         defaultValue={userName}
                       />

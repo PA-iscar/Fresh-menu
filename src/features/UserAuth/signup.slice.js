@@ -31,7 +31,7 @@ const signupSlice = createSlice({
       .addCase(signupUserAPI.rejected, (state, action) => {
         state.isSignedup = false;
         state.isLoading = false;
-        state.signupError = "Could not signup";
+        state.signupError = "User already Registered";
       });
   },
 });

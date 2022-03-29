@@ -46,5 +46,6 @@ const checkSlice = createSlice({
   },
 });
 
+
 export const { resetCheck } = checkSlice.actions;
 export default checkSlice.reducer;
