@@ -4,6 +4,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
 import newOTP from "otp-generators";
+import { signupUserAPI } from "./auth.api";
+import { useDispatch } from "react-redux";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -253,6 +255,8 @@ const UserAuth = () => {
   const [payload, setPayload] = useState({});
   const username = useRef();
 
+  const dispatch = useDispatch();
+
   const otp1 = useRef();
   const otp2 = useRef();
   const otp3 = useRef();
@@ -374,6 +378,14 @@ const UserAuth = () => {
     if (err) {
       return;
     }
+    const signupAction = signupUserAPI({
+      firstName: fName.current.value,
+      lastName: lName.current.value,
+      mobileNumber: phone.current.value,
+      email: email.current.value,
+      password: pass.current.value,
+    });
+    dispatch(signupAction);
     window.alert("Sign up Success, click ok to continue");
     resetModal();
   };
