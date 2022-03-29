@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
-import newOTP from "otp-generators";
-import { signupUserAPI } from "./auth.api";
+// import newOTP from "otp-generators";
+import { checkUserAPI, signupUserAPI } from "./auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSignup } from "./signup.slice";
+import { resetCheck } from "./login.slice";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -242,12 +243,12 @@ const Resend = styled.div`
 const UserAuth = () => {
   const [feature, setFeature] = useState("login");
 
-  const [OTP, setOTP] = useState("");
+  // const [OTP, setOTP] = useState("");
   const [userOTP, setUserOTP] = useState("nnnnn");
   const [isOTPError, setIsOTPError] = useState(false);
   const [resendTime, setResendTime] = useState(15);
   const [OTPErrorMessage, setOTPErrorMessage] = useState("");
-  const [loginError, setLoginError] = useState(false);
+  const [loginDataError, setLoginDataError] = useState(false);
   const [signupfNameError, setSignupfNameError] = useState(false);
   const [signuplNameError, setSignuplNameError] = useState(false);
   const [signupphoneError, setSignupphoneError] = useState(false);
@@ -255,12 +256,17 @@ const UserAuth = () => {
   const [signuppassError, setSignuppassError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [payload, setPayload] = useState({});
+  const [runTimer, setRunTimer] = useState(false);
+  const [userName, setUserName] = useState("");
   const username = useRef();
 
   const dispatch = useDispatch();
   const isSignedup = useSelector((state) => state.signup.isSignedup);
-  const isLoading = useSelector((state) => state.signup.isLoading);
+  const signupLoading = useSelector((state) => state.signup.isLoading);
   const signupError = useSelector((state) => state.signup.signupError);
+  const checkLoading = useSelector((state) => state.check.isLoading);
+  const loginCheckError = useSelector((state) => state.check.checkError);
+  const OTP = useSelector((state) => state.check.OTP);
 
   const otp1 = useRef();
   const otp2 = useRef();
@@ -289,25 +295,33 @@ const UserAuth = () => {
       }
     }
     if (!isEmail && !isPhone) {
-      setLoginError(true);
+      setLoginDataError(true);
       setErrorMessage("Invalid data.");
     } else {
-      setLoginError(false);
+      setLoginDataError(false);
       setErrorMessage("");
-      setPayload({ isEmail, isPhone, value: username.current.value });
-      sendOTP(payload);
+      const val = isEmail
+        ? { query: "email", value: username.current.value }
+        : { query: "phone", value: username.current.value };
+      setPayload(val);
+      getOTP(val);
     }
   };
 
-  const sendOTP = (payload) => {
+  const getOTP = (payload) => {
+    console.log("here");
+    resetCheck();
+    const checkUserAction = checkUserAPI(payload);
+    dispatch(checkUserAction);
+    setRunTimer((pre) => !pre);
     setResendTime(15);
-    setOTP(
-      newOTP.generate(5, {
-        alphabets: false,
-        upperCase: false,
-        specialChar: false,
-      })
-    );
+    // setOTP(
+    //   newOTP.generate(5, {
+    //     alphabets: false,
+    //     upperCase: false,
+    //     specialChar: false,
+    //   })
+    // );
     setUserOTP(() => {
       return `nnnnn`;
     });
@@ -353,12 +367,11 @@ const UserAuth = () => {
 
   const resetModal = () => {
     setFeature("login");
-    setOTP("");
     setUserOTP("nnnnn");
     setIsOTPError(false);
     setResendTime(15);
     setOTPErrorMessage("");
-    setLoginError(false);
+    setLoginDataError(false);
     setErrorMessage("");
     setPayload({});
   };
@@ -435,7 +448,7 @@ const UserAuth = () => {
       }, 1000);
       return () => clearInterval(intervalid);
     }
-  }, [OTP]);
+  }, [OTP, runTimer]);
 
   return (
     <>
@@ -468,23 +481,34 @@ const UserAuth = () => {
                         autoFocus
                         ref={username}
                         onChange={() => {
-                          setLoginError(false);
+                          setUserName(username.current.value);
+                          setLoginDataError(false);
                           setErrorMessage("");
+                          const checkResetAction = resetCheck();
+                          dispatch(checkResetAction);
                         }}
+                        defaultValue={userName}
                       />
-                      {loginError ? (
+                      {loginDataError ? (
                         <ErrorMessage>{errorMessage}</ErrorMessage>
                       ) : (
                         <></>
                       )}
-                      <Button onClick={validateUser}>Send OTP</Button>
+                      {loginCheckError ? (
+                        <ErrorMessage>{loginCheckError}</ErrorMessage>
+                      ) : (
+                        <></>
+                      )}
+                      <Button onClick={validateUser}>
+                        {checkLoading ? "...Checking user" : "Send OTP"}
+                      </Button>
                     </InputWrapper>
                   ) : (
                     <OTPWrapper>
                       <VMessage>
                         We have sent a verification code to {payload.value} via{" "}
-                        {payload.isEmail ? "Email" : "SMS"}. Please enter it
-                        below.
+                        {payload.query === "email" ? "Email" : "SMS"}. Please
+                        enter it below.
                       </VMessage>
                       <InputWrapper>
                         <OTPContainer>
@@ -527,7 +551,7 @@ const UserAuth = () => {
                             </div>
                             <Resend
                               style={{ cursor: "pointer" }}
-                              onClick={sendOTP}
+                              onClick={() => getOTP(payload)}
                             >
                               Resend Code
                             </Resend>
@@ -620,7 +644,7 @@ const UserAuth = () => {
                       )}
                     </InputContainer>
                     <Button onClick={signup}>
-                      {isLoading ? "...Signing in" : "Sign up"}
+                      {signupLoading ? "...Signing in" : "Sign up"}
                     </Button>
                   </InputWrapper>
                 </SignupWrapper>
