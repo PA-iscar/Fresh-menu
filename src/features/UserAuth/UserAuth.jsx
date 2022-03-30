@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { FaFacebookF } from "react-icons/fa";
 import { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
-// import newOTP from "otp-generators";
-import { checkUserAPI, loginUserAPI, signupUserAPI } from "./auth.api";
+import {
+  checkLoginAPI,
+  checkUserAPI,
+  loginUserAPI,
+  signupUserAPI,
+} from "./auth.api";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSignup } from "./signup.slice";
 import { resetCheck } from "./check.slice";
@@ -419,6 +423,11 @@ const UserAuth = () => {
   };
 
   useEffect(() => {
+    const checkLoginAction = checkLoginAPI();
+    dispatch(checkLoginAction);
+  }, [dispatch]);
+
+  useEffect(() => {
     if (loginError) {
       setIsOTPError(true);
       setOTPErrorMessage("Invalid OTP");
@@ -481,9 +490,7 @@ const UserAuth = () => {
                     src="./google_signin.png"
                     alt=""
                     onClick={() => {
-                      window.location.assign(
-                        "http://localhost:8000/auth/google"
-                      );
+                      window.open("http://localhost:8000/auth/google", "_self");
                     }}
                   />
                 </Oauth>

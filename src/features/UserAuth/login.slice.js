@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUserAPI } from "./auth.api";
+import { checkLoginAPI, loginUserAPI, logoutUserAPI } from "./auth.api";
 
 const loginSlice = createSlice({
   name: "login",
@@ -9,14 +9,7 @@ const loginSlice = createSlice({
     isLoading: false,
     isError: false,
   },
-  reducers: {
-    logout(state) {
-      state.isLoggedin = false;
-      state.user = {};
-      state.isLoading = false;
-      state.isError = false;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(loginUserAPI.pending, (state, action) => {
@@ -37,8 +30,35 @@ const loginSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       });
+    builder
+      .addCase(logoutUserAPI.pending, (state) => {
+        state.isLoggedin = false;
+        state.user = {};
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(logoutUserAPI.fulfilled, (state) => {
+        state.isLoggedin = false;
+        state.user = {};
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(logoutUserAPI.rejected, (state) => {
+        state.isLoggedin = false;
+        state.user = {};
+        state.isLoading = false;
+        state.isError = false;
+      });
+    builder
+      .addCase(checkLoginAPI.pending, (state, action) => {})
+      .addCase(checkLoginAPI.fulfilled, (state, action) => {
+        state.isLoggedin = true;
+        state.user = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(checkLoginAPI.rejected, (state, action) => {});
   },
 });
 
-export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;
