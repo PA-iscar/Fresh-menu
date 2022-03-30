@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { checkLoginAPI, loginUserAPI, logoutUserAPI } from "./auth.api";
+import { saveLocalData, loadLocalData } from "../LocalStorage/localStorage";
 
 const loginSlice = createSlice({
   name: "login",
   initialState: {
-    isLoggedin: false,
-    user: {},
+    isLoggedin: loadLocalData("isLoggedin") || false,
+    user: loadLocalData("user") || {},
     isLoading: false,
     isError: false,
   },
@@ -19,6 +20,8 @@ const loginSlice = createSlice({
         state.isError = false;
       })
       .addCase(loginUserAPI.fulfilled, (state, action) => {
+        saveLocalData("isLoggedin", true);
+        saveLocalData("user", action.payload);
         state.isLoggedin = true;
         state.user = action.payload;
         state.isLoading = false;
@@ -32,18 +35,24 @@ const loginSlice = createSlice({
       });
     builder
       .addCase(logoutUserAPI.pending, (state) => {
+        saveLocalData("isLoggedin", false);
+        saveLocalData("user", {});
         state.isLoggedin = false;
         state.user = {};
         state.isLoading = false;
         state.isError = false;
       })
       .addCase(logoutUserAPI.fulfilled, (state) => {
+        saveLocalData("isLoggedin", false);
+        saveLocalData("user", {});
         state.isLoggedin = false;
         state.user = {};
         state.isLoading = false;
         state.isError = false;
       })
       .addCase(logoutUserAPI.rejected, (state) => {
+        saveLocalData("isLoggedin", false);
+        saveLocalData("user", {});
         state.isLoggedin = false;
         state.user = {};
         state.isLoading = false;

@@ -423,9 +423,11 @@ const UserAuth = () => {
   };
 
   useEffect(() => {
-    const checkLoginAction = checkLoginAPI();
-    dispatch(checkLoginAction);
-  }, [dispatch]);
+    if (!isLoggedin) {
+      const checkLoginAction = checkLoginAPI();
+      dispatch(checkLoginAction);
+    }
+  }, [dispatch, isLoggedin]);
 
   useEffect(() => {
     if (loginError) {
@@ -490,7 +492,14 @@ const UserAuth = () => {
                     src="./google_signin.png"
                     alt=""
                     onClick={() => {
-                      window.open("http://localhost:8000/auth/google", "_self");
+                      if (!isLoggedin) {
+                        window.open(
+                          "http://localhost:8000/auth/google",
+                          "_self"
+                        );
+                      } else {
+                        window.alert("already logged in");
+                      }
                     }}
                   />
                 </Oauth>
