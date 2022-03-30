@@ -1,9 +1,10 @@
 import React from "react";
+import NavBar from "./features/landingPage/NavBar";
 
 function App() {
   return (
     <>
-      <div>APP</div>
+    <NavBar/>
     </>
   );
 }
