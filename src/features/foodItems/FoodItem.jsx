@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import { useState } from "react";
 import "./foodItem.css";
@@ -12,9 +12,14 @@ export default function FoodItem() {
   const onClose = () => {
     setVisible(false);
   };
-
+  useEffect(() => {
+    if (count == 0) {
+      setVisible(false);
+    }
+  }, [count]);
   return (
-    <div>
+    <div className={visible ? "food" : ""}>
+      <NavBar visible={visible} count={count} />
       <div className="product">
         <div className="image_social_container">
           <div className="image">
@@ -108,6 +113,44 @@ export default function FoodItem() {
               <span className="back" onClick={onClose}>
                 ×
               </span>
+            </div>
+          </div>
+          <div className="items">
+            <div className="items_cart">
+              <div className="category">
+                <div className="category-border">
+                  <div className="category-dot"></div>
+                </div>
+                <div>
+                  <span className="item_title">
+                    Afghani Chicken Tikka Focaccia
+                  </span>
+                  <div className="actions">
+                    <div className="actions_btn">
+                      <div className="action_first">-</div>
+                      <div className="action_second">{count}</div>
+                      <div className="action_third">+</div>
+                    </div>
+                  </div>
+                  <div className="action_item">
+                    <div className="price_item">
+                      <div className="value-item">
+                        <span className="selling_price">₹219</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="proceed">
+            <button className="proceed-btn">
+              Place Order &nbsp; · &nbsp; ₹ 219
+            </button>
+            <div className="safe_delivery">
+              <div className="safe_meals">
+                Safety Assured meals and contactless delivery
+              </div>
             </div>
           </div>
         </div>

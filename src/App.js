@@ -1,11 +1,11 @@
 import React from "react";
-import FoodItem from "./components/FoodItem";
-import NavBar from "./components/NavBar";
+import FoodItem from "./features/foodItems/FoodItem";
+import NavBar from "./features/foodItems/NavBar";
 
 function App() {
   return (
     <>
-      <NavBar/>
+      {/* <NavBar/> */}
      <FoodItem/>
     </>
   );
