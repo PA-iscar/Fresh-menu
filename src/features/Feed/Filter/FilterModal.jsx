@@ -95,9 +95,10 @@ const FilterModal = ({ setShowModal }) => {
     filter2 = filter1.filter((el) => {
       for (let key of cuisine) {
         if (el.cuisine === key) {
-          return el;
+          return true;
         }
       }
+      return false;
     });
     if (cuisine.length === 0) {
       filter2 = filter1;
@@ -105,9 +106,10 @@ const FilterModal = ({ setShowModal }) => {
     filter3 = filter2.filter((el) => {
       for (let key of trending) {
         if (el.trending === key) {
-          return el;
+          return true;
         }
       }
+      return false;
     });
     if (trending.length === 0) {
       filter3 = filter2;
