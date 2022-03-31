@@ -1,6 +1,6 @@
 import React from "react";
-// import CarouselComponent from "./features/checkOut/Carousel";
 import { Checkout } from "./features/checkOut/Checkout";
+import NavBar from "./features/checkOut/NavBar";
 
 
 function App() {
@@ -8,8 +8,8 @@ function App() {
     <>
       <div>APP</div>
       {/* just to check output */}
+      <NavBar></NavBar>
       <Checkout></Checkout>
-      {/* <CarouselComponent></CarouselComponent> */}
       {/* just to check output */}
     </>
   );
