@@ -6,6 +6,7 @@
   width: 100%;
   top: 0px;
   left: 0px;
+  z-index: 1;
   box-shadow: 0 9px 13px 0 rgb(0 0 0 / 10%);
   background: #fff;
   

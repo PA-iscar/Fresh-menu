@@ -22,7 +22,7 @@
 }
 
 .categoriesFixed {
-    position: fixed;
+    /* position: fixed; */
     display: flex;
     flex-direction: column;
 }
