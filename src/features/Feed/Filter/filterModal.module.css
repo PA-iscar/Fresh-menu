@@ -70,3 +70,8 @@
     font-weight: bold;
     background: linear-gradient(to right, #f5914e, #e85826);
 }
+
+.disabledApplyButton {
+    background: #a7aeb4;
+    cursor: not-allowed;
+}

@@ -6,10 +6,8 @@ import { HiSortDescending } from "react-icons/hi";
 import { BiFilterAlt } from "react-icons/bi";
 import FilterModal from "./FilterModal";
 
-
 const FiltersMenu = () => {
   const [showModal, setShowModal] = useState(false);
-  
 
   const toggleVeg = (e) => {
     e.target.classList.toggle(style.vegActive);
@@ -45,7 +43,7 @@ const FiltersMenu = () => {
               <BiFilterAlt />
             </i>{" "}
             FILTERS
-            {showModal ? <FilterModal /> : <></>}
+            {showModal ? <FilterModal setShowModal={setShowModal} /> : <></>}
           </div>
         </div>
       </div>
