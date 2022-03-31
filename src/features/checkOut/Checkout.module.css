@@ -260,3 +260,9 @@ body {
 .netBankingIndiv:focus {
   border: 1px solid orange;
 }
+
+
+.itemPriceContainer{
+  display: flex;
+  justify-content: space-between;
+}

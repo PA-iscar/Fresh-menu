@@ -23,7 +23,7 @@ import { FaCcAmazonPay } from "react-icons/fa";
 
 export const Checkout = () => {
   function handleSubmit() {
-    alert("Payment Successful...!")
+    alert("Payment Successful...!");
   }
   return (
     <>
@@ -457,6 +457,40 @@ export const Checkout = () => {
                   security gate.
                 </p>
               </div>
+              <div className={styles.itemPriceContainer}>
+                <div className={styles.priceIndivOne}>
+                  <p>Item Price</p>
+                  <p className={styles.mailColor}>Packaging Fee</p>
+                  <p>GST (5%)</p>
+                  <p
+                    className={styles.mailColor}
+                    style={{ paddingLeft: "15px" }}
+                  >
+                    CGST (2.5%)
+                  </p>
+                  <p
+                    className={styles.mailColor}
+                    style={{ paddingLeft: "15px" }}
+                  >
+                    SGST (2.5%)
+                  </p>
+                </div>
+                <div className={styles.priceIndivTwo}>
+                  <p>₹75.00</p>
+                  <p className={styles.mailColor}>+ ₹20.00</p>
+                  <p>+ ₹6.95</p>
+                  <p className={styles.mailColor}>+ ₹3.48</p>
+                  <p className={styles.mailColor}>+ ₹3.48</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className={styles.itemPriceContainer}>
+                <div className={styles.priceIndivOne}>
+                  <h2 className={styles.gray}>Payable</h2>
+                </div>
+                <div className={styles.priceIndivTwo}>₹108.00</div>
+              </div>
             </div>
 
             <div className={styles.rightFirst}>
@@ -469,136 +503,6 @@ export const Checkout = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="">
-        <Tabs defaultTab="vertical-tab-one" vertical>
-          <TabList>
-            <Tab tabFor="vertical-tab-one">Cash</Tab>
-            <Tab tabFor="vertical-tab-two">PhonePe</Tab>
-            <Tab tabFor="vertical-tab-three">Wallets</Tab>
-            <Tab tabFor="vertical-tab-four">PayPal</Tab>
-            <Tab tabFor="vertical-tab-five">Cards and Ticket Restaurant</Tab>
-            <Tab tabFor="vertical-tab-six">Sodexo Meal Card</Tab>
-            <Tab tabFor="vertical-tab-seven">NetBanking</Tab>
-          </TabList>
-          <TabPanel tabId="vertical-tab-one">
-            <div>
-              <p>
-                <BsCash size={50} />
-              </p>
-            </div>
-            <div>
-              <h3>Cash</h3>
-            </div>
-            <div>
-              <p className={styles.mailColor}>Pay with cash on deliver</p>
-            </div>
-            <div>
-              <button className={styles.savebtn}>PLACE ORDER. ₹75</button>
-            </div>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-two">
-            <div>
-              <p>
-                <SiPhonepe size={50} />
-              </p>
-            </div>
-            <div>
-              <p>
-                <button className={styles.savebtn}>PLACE ORDER. ₹75</button>
-              </p>
-            </div>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-three">
-            <p>
-              <div className={styles.walletDiv}>
-                <button className={styles.walletIndiv}>
-                  <SiSamsungpay
-                    style={{ color: "violet" }}
-                    className={styles.vAlign}
-                    size={50}
-                  />
-                </button>
-                <button className={styles.walletIndiv}>
-                  <SiPaytm
-                    style={{ color: "blue" }}
-                    className={styles.vAlign}
-                    size={50}
-                  />
-                </button>
-                <button className={styles.walletIndiv}>
-                  <SiSwiggy
-                    style={{ color: "orange" }}
-                    className={styles.vAlign}
-                    size={50}
-                  />
-                </button>
-                <button className={styles.walletIndiv}>
-                  <SiFoodpanda
-                    style={{ color: "black" }}
-                    className={styles.vAlign}
-                    size={50}
-                  />
-                </button>
-                <button className={styles.walletIndiv}>
-                  <CgPaypal
-                    style={{ color: "red" }}
-                    className={styles.vAlign}
-                    size={50}
-                  />
-                </button>
-                <button
-                  style={{ color: "gray" }}
-                  className={styles.walletIndiv}
-                >
-                  <FaCcAmazonPay className={styles.vAlign} size={50} />
-                </button>
-              </div>
-              <div>
-                <p>
-                  <button
-                    className={styles.savebtn}
-                    style={{ marginLeft: "15px" }}
-                  >
-                    PLACE ORDER. ₹75
-                  </button>
-                </p>
-              </div>
-            </p>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-four">
-            <p>
-              <input type="radio" name="paypal" />
-              <GrPaypal size={20} />
-            </p>
-            <p className={styles.mailColor}>
-              Faster way to Pay (Credit Card users only)
-              <br />
-              Opt-in to skip OTP flow. (Valid on orders above 2000 via Credit
-              Cards only) <br />
-              Your money, details and purchases are protected to PayPal. <br />
-              Manage and cancel automatic payments anytime
-            </p>
-            <br />
-            <p>
-              <input type="radio" name="paypal" />
-              <GrPaypal size={20} />
-            </p>
-            <p className={styles.mailColor}>
-              PayPal regular checkout (Credit Card and Debit Card users only)
-            </p>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-five">
-            <p>Pay with Card</p>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-six">
-            <p>Pay with Sodexo</p>
-          </TabPanel>
-          <TabPanel tabId="vertical-tab-seven">
-            <p>Pay with NetBanking</p>
-          </TabPanel>
-        </Tabs>
-      </div> */}
     </>
   );
 };
