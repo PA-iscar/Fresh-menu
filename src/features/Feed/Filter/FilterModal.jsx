@@ -72,8 +72,22 @@ const FilterModal = ({ setShowModal }) => {
   };
 
   const applyFilters = () => {
+    const newMeals = {};
+    for (let el of filteredMeals) {
+      if (newMeals[el.category]) {
+      } else {
+        newMeals[el.category] = new Array(0);
+      }
+      newMeals[el.category].push(el);
+    }
+    let newMealsArray = [];
+    let i = 0;
+    for (let key in newMeals) {
+      newMealsArray[i++] = { [key]: newMeals[key] };
+    }
     const saveFilterAction = saveFilters({
-      selectedMeals: filteredMeals,
+      selectedMeals: newMealsArray,
+      unsortedSelectedMeals: newMealsArray,
       type,
       cuisine,
       trending,

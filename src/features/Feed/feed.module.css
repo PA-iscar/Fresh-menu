@@ -8,3 +8,42 @@
     border: 0px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.534);
 }
+
+.feedContainer {
+    outline: 1px solid red;
+    display: flex;
+    margin: 30px 10px 0px;
+}
+
+.categories {
+    width: 20%;
+    position: relative;
+    height: 100vh;
+}
+
+.categoriesFixed {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.navItems {
+    padding: 0px 0px 20px;
+}
+
+.feed {
+    outline: 1px solid red;
+    width: 80%;
+}
+
+.categoryContainer {
+    outline: 1px solid red;
+}
+
+.categoryHeading {
+    outline: 1px solid red;
+}
+
+.categoryItemContainer {
+    outline: 1px solid red;
+}
