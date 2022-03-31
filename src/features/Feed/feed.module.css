@@ -1,0 +1,57 @@
+.container {
+    width: 1080px;
+    margin: 10px auto;
+    /* outline: 1px solid red; */
+}
+
+.divider {
+    border: 0px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.534);
+}
+
+.feedContainer {
+    outline: 1px solid red;
+    display: flex;
+    margin: 30px 10px 0px;
+}
+
+.categories {
+    width: 20%;
+    position: relative;
+    height: 100vh;
+}
+
+.categoriesFixed {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.navItems {
+    padding: 0px 0px 20px;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.feed {
+    outline: 1px solid red;
+    width: 80%;
+}
+
+.categoryContainer {
+    outline: 1px solid red;
+}
+
+.categoryHeading {
+    outline: 1px solid red;
+}
+
+.categoryItemContainer {
+    outline: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    row-gap: 50px;
+}

@@ -1,12 +1,13 @@
 import React from "react";
-import Categories from "./features/landingPage/Categories";
 import NavBar from "./features/landingPage/NavBar";
+import Feed from "./features/Feed/Feed";
 
 function App() {
   return (
     <>
+
     <NavBar/>
-    <Categories/>
+      <Feed />
     </>
   );
 }
