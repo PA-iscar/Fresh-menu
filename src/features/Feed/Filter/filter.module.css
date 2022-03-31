@@ -1,7 +1,14 @@
 .filterContainer {
     display: flex;
-    padding: 5px 10px;
+    outline: 1px solid red;
+    padding: 10px 10px;
     justify-content: space-between;
+    background-color: white;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.534);
+    /* padding-bottom: 20px; */
+    z-index: 1;
+    position: sticky;
+    top: 0;
 }
 
 .filters {
