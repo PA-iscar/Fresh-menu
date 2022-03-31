@@ -5,6 +5,7 @@ import AuthPage from "./Pages/AuthPage";
 function App() {
   return (
     <>
+      <NavBar />
       <Feed />
     </>
   );
