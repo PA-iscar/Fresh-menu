@@ -1,5 +1,5 @@
 import React from "react";
-import CarouselComponent from "./features/checkOut/Carousel";
+// import CarouselComponent from "./features/checkOut/Carousel";
 import { Checkout } from "./features/checkOut/Checkout";
 
 

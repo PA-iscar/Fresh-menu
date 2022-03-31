@@ -18,7 +18,7 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: white;
-  border: 1px solid #9b9b9b;
+  border: 1px solid #f3f3f3;
   padding: 1.2rem;
   margin: 1rem;
 }
@@ -44,7 +44,7 @@ body {
 }
 .rightFirst {
   background-color: white;
-  border: 1px solid #9b9b9b;
+  border: 1px solid #f3f3f3;
   padding: 1.2rem;
   margin: 1rem;
 }
@@ -196,10 +196,67 @@ body {
 }
 
 .vAlign {
-  padding-top: 10%
+  padding-top: 10%;
 }
 
 .walletIndiv:active,
 .walletIndiv:focus {
+  border: 1px solid orange;
+}
+
+.formCard {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 60%;
+}
+.formDate {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  height: 30px;
+  width: 25%;
+}
+
+.formName {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 70%;
+}
+
+.formCVV {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 20%;
+}
+
+.netBankingcontainer{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap ;
+}
+.netBankingIndiv{
+  height: fit-content;
+  width: 100px;
+    border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+  background-color: white;
+  margin: 5px;
+}
+.bankLogoIMG{
+  height: 30px;
+  width: 30px;
+}
+
+.netBankingIndiv:active,
+.netBankingIndiv:focus {
   border: 1px solid orange;
 }

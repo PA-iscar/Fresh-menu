@@ -4,7 +4,7 @@ import { FiMapPin } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { GrHome, GrPaypal } from "react-icons/gr";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import { BsDoorOpen } from "react-icons/bs";
+import { BsDoorOpen, BsCreditCard } from "react-icons/bs";
 import { RiRadioButtonLine } from "react-icons/ri";
 import styles from "./Checkout.module.css";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
@@ -252,13 +252,123 @@ export const Checkout = () => {
                     </p>
                   </TabPanel>
                   <TabPanel tabId="vertical-tab-five">
-                    <p>Pay with Card</p>
+                    <p>
+                      <span>
+                        <BsCreditCard size={50} />
+                      </span>
+                    </p>
+                    <p>New Card Details</p>
+                    <p>
+                      <input
+                        type="text"
+                        placeholder="Card Number"
+                        className={styles.formCard}
+                      />
+                      <input type="date" className={styles.formDate} />
+                    </p>
+                    <p>
+                      <input
+                        type="text"
+                        placeholder="Full Name"
+                        className={styles.formName}
+                      />
+                      <input
+                        type="number"
+                        placeholder="CVV"
+                        className={styles.formCVV}
+                      />
+                    </p>
+                    <p>
+                      <input type="checkbox" />
+                      &nbsp;Save card for quicker checkout
+                    </p>
+                    <p>
+                      <button
+                        className={styles.savebtn}
+                        style={{ marginLeft: "15px" }}
+                      >
+                        PLACE ORDER. ₹75
+                      </button>
+                    </p>
                   </TabPanel>
                   <TabPanel tabId="vertical-tab-six">
-                    <p>Pay with Sodexo</p>
+                    <p>
+                      <span>
+                        <BsCreditCard size={50} style={{ color: "orange" }} />
+                      </span>
+                    </p>
+                    <p>New Sodexo Card</p>
+                    <p>
+                      <button className={styles.savebtn}>
+                        ADD CARD AND PLACE ORDER
+                      </button>
+                    </p>
                   </TabPanel>
                   <TabPanel tabId="vertical-tab-seven">
-                    <p>Pay with NetBanking</p>
+                    <p></p>
+                    <div className={styles.netBankingcontainer}>
+                      <button className={styles.netBankingIndiv}>
+                        <img
+                          src="https://www.logotaglines.com/wp-content/uploads/2016/08/ICICI-Logo.png"
+                          alt="ICICI"
+                          className={styles.bankLogoIMG}
+                        />
+                        <p>
+                          ICICI <br />
+                          Bank
+                        </p>
+                      </button>
+                      <button className={styles.netBankingIndiv}>
+                        <img
+                          src="https://www.vhv.rs/dpng/d/107-1073363_hdfc-bank-hd-png-download.png"
+                          alt="HDFC"
+                          className={styles.bankLogoIMG}
+                        />
+                        <p>
+                          HDFC <br />
+                          Bank
+                        </p>
+                      </button>
+                      <button className={styles.netBankingIndiv}>
+                        <img
+                          src="https://w7.pngwing.com/pngs/509/329/png-transparent-axis-bank-connaught-place-new-delhi-security-business-bank-purple-angle-violet-thumbnail.png"
+                          alt="AXIS"
+                          className={styles.bankLogoIMG}
+                        />
+                        <p>
+                          Axis <br />
+                          Bank
+                        </p>
+                      </button>
+                      <button className={styles.netBankingIndiv}>
+                        <img
+                          src="https://www.examsplanner.in/media/scholarship/kotak_shiksha_nidhi_scholarship.png"
+                          alt="KOTAK"
+                          className={styles.bankLogoIMG}
+                        />
+                        <p>
+                          Kotak <br />
+                          Bank
+                        </p>
+                      </button>
+                    </div>
+                    <p className={styles.mailColor}>Other Banks</p>
+                    <p>
+                      <select className={styles.formCard}>
+                        <option>Bank Of India</option>
+                        <option>SBI</option>
+                        <option>Canara Bank</option>
+                        <option>IndusInd Bank</option>
+                        <option>Yes Bank</option>
+                      </select>
+                    </p>
+                    <p>
+                      <button
+                        className={styles.savebtn}
+                      >
+                        PLACE ORDER. ₹75
+                      </button>
+                    </p>
                   </TabPanel>
                 </Tabs>
               </div>
