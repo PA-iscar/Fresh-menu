@@ -79,10 +79,18 @@ export default function NavBar({ visible, count }) {
             </Dropdown>
           </a>
         
+         {count==0? <a className="common-link">
+          <span class="cartCount">
+                {count}
+            </span>
+           <ShoppingCartOutlined />
+          </a>: <a className="common_cart_link">
+          <span class="cartCount">
+                {count}
+            </span>
+           <ShoppingCartOutlined />
+          </a>}
          
-          <a className="common-link">
-            <ShoppingCartOutlined />
-          </a>
         </div>
       </div>
     </div>

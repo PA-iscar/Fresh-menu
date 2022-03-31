@@ -65,7 +65,7 @@
   font-size: 14px;
   color: #e85826;
   position: relative;
-  padding-left: 8px;
+  padding-right: 8px;
   padding-top: 1px;
 }
 
@@ -299,7 +299,7 @@
   vertical-align: top;
   float: right;
   font-size: 16px;
-  margin-top: 40px;
+  margin-top: -38px;
 }
 
 .actions_btn {
@@ -426,4 +426,280 @@
 
 .safe_meals {
   margin: 10px;
+}
+
+
+.anything{
+  font-family:Arial,sans-serif;
+  color: #535657;
+  font-weight: bolder;
+  padding: 16px 16px 20px;
+  text-align: left;
+  position: relative;
+ 
+}
+
+.add_ons{
+  background: #f7f7f7;
+  height: 300px;
+}
+
+.upsale_product{
+  padding: 12px 16px;
+}
+
+.image_preloaded{
+  position: relative;
+  width: 75px;
+  height: 75px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.info{
+  display: inline-flex;
+    vertical-align: top;
+    margin-left: 5px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: calc(100% - 90px);
+    height: auto;
+    position: relative;
+    padding: 0 0 0 20px;
+    box-sizing: border-box;
+}
+
+.product_title{
+  min-height: 40px;
+}
+
+.veg_icon{
+  position: absolute;
+    left: 0px;
+    margin-top: 2px;
+    border-color: #2ebd59;
+    border: 1px solid #2ebd59;
+    width: 10px;
+    height: 10px;
+}
+
+.veg_dot{
+  background: #2ebd59;
+  width: 6px;
+    height: 6px;
+    margin: 1px;
+    display: block!important;
+    border-radius: 6px;
+}
+
+.title{
+  word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1;
+    color: #000;
+}
+
+.info .actions{
+  display: inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: ProximaNova-Regular,Helvetica,Arial,sans-serif;
+}
+
+.info .actions .price{
+  display: inline-block;
+  align-self: center;
+  font-size: 18px;
+    color: #343534;
+}
+
+.info .actions .price .price{
+  font-size: 16px;
+    color: #4a4a4a;
+    line-height: 30px;
+}
+
+.add_cart_btn{
+  line-height: normal;
+    height: 30px;
+    display: inline-block;
+    float: right;
+    color: #df561d!important;
+    cursor: pointer;
+    background: 0 0;
+    border: 1px solid #df561d;
+    width: 90px!important;
+    max-height: 30px;
+    overflow: hidden;
+    border-radius: 17.5px;
+}
+
+.suggested{
+  margin: -16px auto 105px;
+    padding-top: 65px;
+    padding-right: 10%!important;
+    padding-left: 10%!important;
+    max-width: 1185px;
+}
+
+.suggested h2 {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+  margin: 0;
+  margin-bottom: 26px;
+  text-transform: uppercase;
+}
+
+.suggested h2:before{
+  content: "-----------";
+  letter-spacing: -4px;
+    color: #d1d2d9;
+    padding-right: 15px;
+}
+
+.suggested h2:after{
+  content: "-----------";
+  letter-spacing: -4px;
+    color: #d1d2d9;
+    padding-right: 15px;
+}
+
+.suggested .list {
+  margin: 0 auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  /* display: -webkit-box; */
+  display: flex;
+  justify-content: center;
+}
+
+.suggested .list .item {
+  /* display: -webkit-box; */
+  display: flex;
+  box-sizing: border-box;
+  width: 19%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.suggested .list .item .image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+}
+
+.suggested .list .item h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #343534;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-family: none;
+  font-weight: revert;
+  
+}
+
+.suggested .tags {
+  -webkit-box-align: center;
+  align-items: center;
+  /* display: -webkit-box; */
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  line-height: 1.9;
+  margin-bottom: 35px;
+}
+
+.suggested .tags .category {
+  font-family:Helvetica,Arial,Sans-Serif;
+  line-height: 1.9;
+  font-size: 14px;
+  color: #868a86;
+  position: relative;
+  font-weight: 400;
+  padding-left: 5px;
+}
+
+.suggested span+span:before {
+  top: 50%;
+  left: 5px;
+  content: " ";
+  width: 3px;
+  margin-top: -1px;
+  height: 3px;
+  border-radius: 2px;
+  position: absolute;
+  background-color: #868a86;
+}
+
+.suggested span+span {
+  padding-left: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Helvetica,Arial,Sans-Serif;
+  font-size: 14px;
+  color: #868a86;
+  position: relative;
+  font-weight: 400;
+}
+
+
+.suggested .list .item .actions {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  /* display: -webkit-box; */
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  height: 34px;
+}
+
+.suggested .list .item .actions span {
+  font-size: 16px;
+  color: #868a86;
+  -webkit-box-flex: 1;
+  flex: 1;
+  flex-basis: 1e-9px;
+}
+
+.suggested .list .item .actions .add {
+  line-height: 25px;
+  width: 75px;
+  background-image: linear-gradient(to right,#fbcd6b,#f19e00);
+  border-radius: 17.5px;
+  color: #fff!important;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  border: none;
+  font-family: Helvetica,Arial,sans-serif;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  margin: 0!important;
+  justify-content: center;
 }
