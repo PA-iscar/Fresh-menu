@@ -11,38 +11,38 @@ import { useDispatch, useSelector } from "react-redux";
 const FiltersMenu = () => {
   const [showModal, setShowModal] = useState(false);
   const selectedMeals = useSelector((state) => state.meals.selectedMeals);
+  const vegOnlyMeals = useSelector((state) => state.meals.vegOnlyMeals);
+  const prevType = useSelector((state) => state.meals.type);
+  const isSorted = useSelector((state) => state.meals.isSorted);
+  const isVeg = useSelector((state) => state.meals.isVeg);
   const unsortedSelectedMeals = useSelector(
     (state) => state.meals.unsortedSelectedMeals
   );
-  const [type, setType] = useState(false);
-  const [sort, setSort] = useState(false);
   const dispatch = useDispatch();
 
   const toggleVeg = (e) => {
     e.target.classList.toggle(style.vegActive);
-    setType((prev) => {
-      const saveFilterAction = saveFilters({
-        type: !prev ? "Veg" : "",
-      });
-      dispatch(saveFilterAction);
-      return !prev;
+    const saveFilterAction = saveFilters({
+      selectedMeals: isVeg ? unsortedSelectedMeals : vegOnlyMeals,
+      isVeg: !isVeg,
+      type: prevType === "Veg" ? "" : "Veg",
     });
+    dispatch(saveFilterAction);
   };
   const togglePrice = (e) => {
-    setSort((prev) => {
-      let newMeals = [];
-      let i = 0;
-      for (let el of selectedMeals) {
-        let arr = el[Object.keys(el)[0]];
-        arr = arr.slice().sort((a, b) => a.price - b.price);
-        newMeals[i++] = { [Object.keys(el)[0]]: arr };
-      }
-      const saveFilterAction = saveFilters({
-        selectedMeals: !prev ? newMeals : unsortedSelectedMeals,
-      });
-      dispatch(saveFilterAction);
-      return !prev;
+    let newMeals = [];
+    let i = 0;
+    for (let el of selectedMeals) {
+      let arr = el[Object.keys(el)[0]];
+      arr = arr.slice().sort((a, b) => a.price - b.price);
+      newMeals[i++] = { [Object.keys(el)[0]]: arr };
+    }
+    const saveFilterAction = saveFilters({
+      selectedMeals: isSorted ? unsortedSelectedMeals : newMeals,
+      isSorted: !isSorted,
+      type: prevType,
     });
+    dispatch(saveFilterAction);
 
     if (e.target.tagName === "DIV") {
       e.target.classList.toggle(style.priceActive);

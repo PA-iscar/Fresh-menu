@@ -101,7 +101,7 @@ const FilterModal = ({ setShowModal }) => {
     let filter2;
     let filter3;
     filter1 = meals.filter((el) => {
-      return el.type === type;
+      return el.type === type || el.type === appliedType;
     });
     if (type === "") {
       filter1 = meals;
@@ -130,7 +130,7 @@ const FilterModal = ({ setShowModal }) => {
     }
 
     setFilteredMeals(filter3);
-  }, [meals, type, cuisine, trending]);
+  }, [meals, type, cuisine, trending, appliedType]);
 
   return (
     <>
