@@ -19,6 +19,7 @@ const Feed = () => {
 
   return (
     <>
+    <div style={{minHeight: "500px"}}></div>
       <div className={style.container}>
         <FiltersMenu />
         <hr className={style.divider} />
