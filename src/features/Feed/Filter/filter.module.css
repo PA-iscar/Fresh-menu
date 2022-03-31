@@ -1,6 +1,6 @@
 .filterContainer {
     display: flex;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
     padding: 10px 10px;
     justify-content: space-between;
     background-color: white;
@@ -8,7 +8,7 @@
     /* padding-bottom: 20px; */
     z-index: 1;
     position: sticky;
-    top: 0;
+    top: 143px;
 }
 
 .filters {

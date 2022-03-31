@@ -19,7 +19,6 @@ const Feed = () => {
 
   return (
     <>
-    <div style={{minHeight: "500px"}}></div>
       <div className={style.container}>
         <FiltersMenu />
         <hr className={style.divider} />
@@ -46,7 +45,7 @@ const Feed = () => {
           <div className={style.feed}>
             {!isLoading ? (
               <>
-              {/* <FeedItem /> */}
+                {/* <FeedItem /> */}
                 {selectedMeals.map((el) => {
                   return (
                     <div

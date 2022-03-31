@@ -10,7 +10,7 @@
 }
 
 .feedContainer {
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
     display: flex;
     margin: 30px 10px 0px;
 }
@@ -23,6 +23,8 @@
 
 .categoriesFixed {
     /* position: fixed; */
+    position: sticky;
+    top: 200px;
     display: flex;
     flex-direction: column;
 }
@@ -36,31 +38,31 @@
 }
 
 .feed {
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
     width: 80%;
 }
 
 .categoryContainer {
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
 }
 
 .categoryHeading {
     /* outline: 1px solid red; */
     padding: 20px 0 10px;
-  text-align: left;
-  font-size: 25px;
-  color: #373737;
-  margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
+    text-align: left;
+    font-size: 25px;
+    color: #373737;
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
 }
 
 .categoryItemContainer {
-     /* outline: 1px solid red; */
+    /* outline: 1px solid red; */
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 15px;
     row-gap: 50px;
 }
