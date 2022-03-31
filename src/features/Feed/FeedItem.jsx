@@ -1,51 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 import { GoPrimitiveDot } from "react-icons/go";
-
-const ItemWrapper = styled.div`
-  outline: 1px solid red;
-  width: 270px;
-  height: 270px;
-`;
-const ItemHeader = styled.div`
-  outline: 1px solid red;
-`;
-const TypeIcon = styled(GoPrimitiveDot)`
-  border: 1px solid;
-`;
-const ItemImage = styled.img`
-  width: 100%;
-  height: 60%;
-`;
-const ItemName = styled.div``;
-const ItemFooter = styled.div``;
-const ItemPrice = styled.div``;
-const ItemCart = styled.div``;
+import "./feedItem.css";
 
 const FeedItem = ({ item }) => {
   return (
-    <>
-      <ItemWrapper>
-        <ItemHeader>
-          <TypeIcon
-            color={
-              item.type === "Veg"
-                ? "limegreen"
-                : item.type === "Non Veg"
-                ? "#d0021b"
-                : "brown"
-            }
-          />
-          {item.cuisine.toUpperCase()}
-        </ItemHeader>
-        <ItemImage src={item.image} />
-        <ItemName>{item.name}</ItemName>
-        <ItemFooter>
-          <ItemPrice>{item.price}</ItemPrice>
-          <ItemCart></ItemCart>
-        </ItemFooter>
-      </ItemWrapper>
-    </>
+   
+     
+     
+          <div className="list">
+            <div className="item">
+              <div className="product">
+                <div className="new_header">
+                  <div className="new_header_icon">
+                   <GoPrimitiveDot style={{border:"1px solid",color:"red",marginRight:"5px"}}/>
+                   <div >{item.cuisine}</div>
+                  </div>
+                </div>
+                <div className="product_body">
+                  <a>
+                    <div className="image_container">
+                      <img src={item.image}/>
+                    </div>
+                  </a>
+                  <div className="offers_tag">
+                  <div class="left-shape"></div>
+                  {item.trending}
+                  </div>
+                  <h3>{item.name}</h3>
+                  <div className="product_body_actions">
+                    <div className="product_body_actions_price">
+                    <span className="price">₹{item.price}</span>
+                    </div>
+                    <div className="cart">
+                      ADD
+                    </div>
+                   
+                  </div>
+                   <div className="product_footer">
+                      <div className="foot_cont">
+                        
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+   
   );
 };
 

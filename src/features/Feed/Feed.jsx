@@ -45,6 +45,7 @@ const Feed = () => {
           <div className={style.feed}>
             {!isLoading ? (
               <>
+              {/* <FeedItem /> */}
                 {selectedMeals.map((el) => {
                   return (
                     <div
