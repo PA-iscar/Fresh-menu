@@ -22,6 +22,9 @@ import { CgPaypal } from "react-icons/cg";
 import { FaCcAmazonPay } from "react-icons/fa";
 
 export const Checkout = () => {
+  function handleSubmit() {
+    alert("Payment Successful...!")
+  }
   return (
     <>
       <div className={styles.checkoutContainer}>
@@ -151,7 +154,10 @@ export const Checkout = () => {
                       </p>
                     </div>
                     <div>
-                      <button className={styles.savebtn}>
+                      <button
+                        className={styles.savebtn}
+                        onClick={() => handleSubmit()}
+                      >
                         PLACE ORDER. ₹75
                       </button>
                     </div>
@@ -164,7 +170,10 @@ export const Checkout = () => {
                     </div>
                     <div>
                       <p>
-                        <button className={styles.savebtn}>
+                        <button
+                          className={styles.savebtn}
+                          onClick={() => handleSubmit()}
+                        >
                           PLACE ORDER. ₹75
                         </button>
                       </p>
@@ -220,6 +229,7 @@ export const Checkout = () => {
                           <button
                             className={styles.savebtn}
                             style={{ marginLeft: "15px" }}
+                            onClick={() => handleSubmit()}
                           >
                             PLACE ORDER. ₹75
                           </button>
@@ -249,6 +259,14 @@ export const Checkout = () => {
                     <p className={styles.mailColor}>
                       PayPal regular checkout (Credit Card and Debit Card users
                       only)
+                    </p>
+                    <p>
+                      <button
+                        className={styles.savebtn}
+                        onClick={() => handleSubmit()}
+                      >
+                        PLACE ORDER. ₹75
+                      </button>
                     </p>
                   </TabPanel>
                   <TabPanel tabId="vertical-tab-five">
@@ -286,6 +304,7 @@ export const Checkout = () => {
                       <button
                         className={styles.savebtn}
                         style={{ marginLeft: "15px" }}
+                        onClick={() => handleSubmit()}
                       >
                         PLACE ORDER. ₹75
                       </button>
@@ -299,7 +318,10 @@ export const Checkout = () => {
                     </p>
                     <p>New Sodexo Card</p>
                     <p>
-                      <button className={styles.savebtn}>
+                      <button
+                        className={styles.savebtn}
+                        onClick={() => handleSubmit()}
+                      >
                         ADD CARD AND PLACE ORDER
                       </button>
                     </p>
@@ -365,6 +387,7 @@ export const Checkout = () => {
                     <p>
                       <button
                         className={styles.savebtn}
+                        onClick={() => handleSubmit()}
                       >
                         PLACE ORDER. ₹75
                       </button>
