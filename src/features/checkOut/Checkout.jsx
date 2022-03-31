@@ -9,7 +9,7 @@ import { RiRadioButtonLine } from "react-icons/ri";
 import styles from "./Checkout.module.css";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { Tabs, Tab, TabPanel, TabList } from "react-web-tabs";
-import "./Carousel.css";
+import "./VerticalTabs.css";
 import { BsCash } from "react-icons/bs";
 import {
   SiPhonepe,
@@ -186,42 +186,42 @@ export const Checkout = () => {
                           <SiSamsungpay
                             style={{ color: "violet" }}
                             className={styles.vAlign}
-                            size={50}
+                            size={40}
                           />
                         </button>
                         <button className={styles.walletIndiv}>
                           <SiPaytm
                             style={{ color: "blue" }}
                             className={styles.vAlign}
-                            size={50}
+                            size={40}
                           />
                         </button>
                         <button className={styles.walletIndiv}>
                           <SiSwiggy
                             style={{ color: "orange" }}
                             className={styles.vAlign}
-                            size={50}
+                            size={40}
                           />
                         </button>
                         <button className={styles.walletIndiv}>
                           <SiFoodpanda
                             style={{ color: "black" }}
                             className={styles.vAlign}
-                            size={50}
+                            size={40}
                           />
                         </button>
                         <button className={styles.walletIndiv}>
                           <CgPaypal
                             style={{ color: "red" }}
                             className={styles.vAlign}
-                            size={50}
+                            size={40}
                           />
                         </button>
                         <button
                           style={{ color: "gray" }}
                           className={styles.walletIndiv}
                         >
-                          <FaCcAmazonPay className={styles.vAlign} size={50} />
+                          <FaCcAmazonPay className={styles.vAlign} size={40} />
                         </button>
                       </div>
                       <div>
@@ -399,7 +399,7 @@ export const Checkout = () => {
           </div>
           <div className={styles.rightMain}>
             <div className={styles.rightFirst}>
-              <h2>Delivery Time</h2>
+              <h2 className={styles.gray}>Delivery Time</h2>
               <p>Deliver Now</p>
               <p className={styles.mailColor}>
                 Your order will be delivered within{" "}
@@ -409,8 +409,8 @@ export const Checkout = () => {
             </div>
 
             <div className={styles.rightFirst}>
-              <h2>You might also Like</h2>
-              <div>Put slider here</div>
+              <h2 className={styles.gray}>Your Order</h2>
+              {/* <div>Put slider here</div> */}
               <hr />
               <div className={styles.foodName}>
                 <p>
@@ -487,14 +487,14 @@ export const Checkout = () => {
 
               <div className={styles.itemPriceContainer}>
                 <div className={styles.priceIndivOne}>
-                  <h2 className={styles.gray}>Payable</h2>
+                  <h2 className={styles.gray} style={{marginTop:"1px"}}>Payable</h2>
                 </div>
                 <div className={styles.priceIndivTwo}>₹108.00</div>
               </div>
             </div>
 
             <div className={styles.rightFirst}>
-              <h2>Need Help?</h2>
+              <h2 className={styles.gray}>Need Help?</h2>
               <p className={styles.greenColor}>080-8080-8080</p>
               <p className={styles.mailColor}>
                 Lines open from 9:00 AM to 12:00 AM
