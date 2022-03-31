@@ -1,12 +1,10 @@
 import React from "react";
-import NavBar from "./features/landingPage/NavBar";
 import Feed from "./features/Feed/Feed";
+import AuthPage from "./Pages/AuthPage";
 
 function App() {
   return (
     <>
-
-    <NavBar/>
       <Feed />
     </>
   );
