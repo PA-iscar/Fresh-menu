@@ -163,6 +163,7 @@
   font-size: 15px;
   line-height: 1.67;
   color: #4a4a4a;
+  text-align: justify;
 }
 
 .food_tags {
@@ -299,7 +300,7 @@
   vertical-align: top;
   float: right;
   font-size: 16px;
-  margin-top: -38px;
+  margin-top: 0px;
 }
 
 .actions_btn {

@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { saveLocalData,loadLocalData } from "../LocalStorage/localStorage";
 import { getCartAPI } from "./cart.api";
 
 const Cart = ({ visible, setVisible }) => {
+  var cartItems=loadLocalData("cart");
   const [count, setCount] = useState(0);
-  const [originalPrice, setOriginalPrice] = useState(219);
-  const [newPrice, setNewPrice] = useState(219);
+  const [total,setTotal]=useState(0);
   const user = useSelector((state) => state.login.user);
+  const [meals,setMeals]=useState([]);
   const cart = useSelector((state) =>
     user._id ? state.cart.meals : state.cart.localMeals
   );
   const onClose = () => {
     setVisible(false);
   };
+
+  useEffect(()=>{
+    const mealData=loadLocalData("meals");
+    var result = mealData.reduce(function(tot, arr) { 
+      return tot + arr.total;
+    },0);
+    var items=mealData.reduce(function(tot, arr) { 
+      return tot + arr.count;
+    },0);
+   saveLocalData("cart",items);
+   cartItems=loadLocalData("cart")
+    setTotal(result);
+    console.log("meals",mealData);
+    setMeals(mealData)
+  })
 
   return (
     <>
@@ -24,10 +41,10 @@ const Cart = ({ visible, setVisible }) => {
                 <span className="header_cart">
                   Your Cart
                   <br></br>
-                  {count == 1 ? (
-                    <span className="header_count">{count} Item</span>
+                  {cartItems == 1 ? (
+                    <span className="header_count">{cartItems} Item</span>
                   ) : (
-                    <span className="header_count">{count} Items</span>
+                    <span className="header_count">{cartItems} Items</span>
                   )}
                 </span>
                 <span className="back" onClick={onClose}>
@@ -35,33 +52,35 @@ const Cart = ({ visible, setVisible }) => {
                 </span>
               </div>
             </div>
-            <div className="items">
-              <div className="items_cart">
+            
+              {meals.map((m)=>{
+                return <div className="items">
+                  <div className="items_cart">
                 <div className="category">
                   <div className="category-border">
                     <div className="category-dot"></div>
                   </div>
                   <div>
                     <span className="item_title">
-                      Afghani Chicken Tikka Focaccia
+                      {m.name}
                     </span>
                     <div className="actions">
                       <div className="actions_btn">
                         <div
                           className="action_first"
                           onClick={() => {
-                            setCount(count - 1);
-                            setNewPrice(originalPrice * (count - 1));
+                            // setCount(count - 1);
+                            // setNewPrice(originalPrice * (count - 1));
                           }}
                         >
                           -
                         </div>
-                        <div className="action_second">{count}</div>
+                        <div className="action_second">{m.count}</div>
                         <div
                           className="action_third"
                           onClick={() => {
-                            setCount(count + 1);
-                            setNewPrice(originalPrice * (count + 1));
+                            // setCount(count + 1);
+                            // setNewPrice(originalPrice * (count + 1));
                           }}
                         >
                           +
@@ -71,17 +90,20 @@ const Cart = ({ visible, setVisible }) => {
                     <div className="action_item">
                       <div className="price_item">
                         <div className="value-item">
-                          <span className="selling_price">₹{newPrice}</span>
+                          <span className="selling_price">₹{m.price}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
+              })}
+              
+            
             <div className="proceed">
               <button className="proceed-btn">
-                Place Order &nbsp; · &nbsp; ₹ {newPrice}
+                Place Order &nbsp; · &nbsp; ₹ {total}
               </button>
               <div className="safe_delivery">
                 <div className="safe_meals">

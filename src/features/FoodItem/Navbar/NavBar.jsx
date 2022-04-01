@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import "antd/dist/antd.css";
 import { Tooltip, Button } from "antd";
 import { Menu, Dropdown } from "antd";
+import { loadLocalData } from "../../LocalStorage/localStorage";
 // import { DownOutlined } from "@ant-design/icons";
 import Icon, {
   DownOutlined,
@@ -15,7 +16,8 @@ import Icon, {
 import UserAuth from "../../UserAuth/UserAuth";
 import { Link } from "react-router-dom";
 
-export default function NavBar({ visible, count }) {
+export default function NavBar({ visible}) {
+  var count=loadLocalData('cart')
   const [feature, setFeature] = useState("");
   const menu = (
     <Menu>
@@ -37,6 +39,7 @@ export default function NavBar({ visible, count }) {
       </Menu.Item>
     </Menu>
   );
+
   return (
     <div className={visible ? "navbar-visible-wrapper" : "navbar-wrapper"}>
       <UserAuth feature={feature} setFeature={setFeature} />
@@ -90,7 +93,7 @@ export default function NavBar({ visible, count }) {
 
           {count == 0 ? (
             <a className="common-link">
-              <span className="cartCount">{count}</span>
+              <span className="cartCount"></span>
               <ShoppingCartOutlined />
             </a>
           ) : (

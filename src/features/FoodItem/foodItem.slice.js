@@ -4,6 +4,7 @@ const foodSlice = createSlice({
   name: "meal",
   initialState: {
     singleMeal: {},
+    meals:[],
     isLoading: false,
   },
   reducers: {},
