@@ -42,7 +42,7 @@ export const Checkout = () => {
                   </span>{" "}
                   Logged In As
                 </h2>
-                <p className={styles.mailColor}>name@gmail.com</p>
+                <p className={styles.mailColor}>abhishek@gmail.com</p>
               </div>
               <div className={styles.rightOne}>
                 <h3 className={styles.orange}>Details</h3>{" "}

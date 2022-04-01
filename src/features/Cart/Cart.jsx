@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getCartAPI } from "./cart.api";
 
 const Cart = ({ visible, setVisible }) => {
@@ -13,6 +14,7 @@ const Cart = ({ visible, setVisible }) => {
   const onClose = () => {
     setVisible(false);
   };
+  const navigate = useNavigate()
 
   return (
     <>
@@ -80,7 +82,12 @@ const Cart = ({ visible, setVisible }) => {
               </div>
             </div>
             <div className="proceed">
-              <button className="proceed-btn">
+              <button
+                className="proceed-btn"
+                onClick={() => {
+                navigate("/checkout")
+                }}
+              >
                 Place Order &nbsp; · &nbsp; ₹ {newPrice}
               </button>
               <div className="safe_delivery">
