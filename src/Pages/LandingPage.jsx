@@ -10,6 +10,7 @@ const LandingPage = () => {
       <NavBar />
       <NavCarousel />
       <Feed />
+      <Footer />
     </>
   );
 };

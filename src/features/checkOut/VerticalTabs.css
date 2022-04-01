@@ -1,0 +1,122 @@
+.rwt__tabs[data-rwt-vertical="true"] {
+  display: flex;
+}
+
+.rwt__tablist:not([aria-orientation="vertical"]) {
+  border-bottom: 1px solid #ddd;
+}
+
+.rwt__tablist[aria-orientation="vertical"] {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border-right: 1px solid #ddd;
+  margin-right: 1rem;
+  background-color: #edf0f2;
+}
+
+.rwt__tab {
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1rem 2rem;
+  transition: background 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  text-align: left;
+}
+
+.rwt__tab[aria-selected="false"]:hover,
+.rwt__tab:focus {
+  outline: 0;
+  /* background-color: red; */
+  cursor: pointer;
+}
+
+.rwt__tab[aria-selected="true"] {
+  position: relative;
+}
+
+.rwt__tab[aria-selected="true"]:after {
+  content: "";
+  position: absolute;
+}
+
+.rwt__tablist:not([aria-orientation="vertical"])
+  .rwt__tab[aria-selected="true"]:after {
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  border-bottom: 3px solid orange;
+}
+
+.rwt__tablist[aria-orientation="vertical"]
+  .rwt__tab[aria-selected="true"]:after {
+  right: -1px;
+  top: 0;
+  height: 100%;
+  border-right: 3px solid orange;
+}
+
+
+
+@media screen and (max-width: 500px) {
+  .rwt__tabs[data-rwt-vertical="true"] {
+    display: block;
+    text-align: center;
+  }
+  
+  .rwt__tablist:not([aria-orientation="vertical"]) {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .rwt__tablist[aria-orientation="vertical"] {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-right: 1px solid #ddd;
+    margin-right: 1rem;
+    background-color: #edf0f2;
+  }
+  
+  .rwt__tab {
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 1rem 2rem;
+    transition: background 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    text-align: left;
+  }
+  
+  .rwt__tab[aria-selected="false"]:hover,
+  .rwt__tab:focus {
+    outline: 0;
+    /* background-color: red; */
+    cursor: pointer;
+  }
+  
+  .rwt__tab[aria-selected="true"] {
+    position: relative;
+  }
+  
+  .rwt__tab[aria-selected="true"]:after {
+    content: "";
+    position: absolute;
+  }
+  
+  .rwt__tablist:not([aria-orientation="vertical"]) .rwt__tab[aria-selected="true"]:after {
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    border-bottom: 3px solid orange;
+  }
+  
+  .rwt__tablist[aria-orientation="vertical"] .rwt__tab[aria-selected="true"]:after {
+    right: -1px;
+    top: 0;
+    height: 100%;
+    border-right: 3px solid orange;
+  }
+}

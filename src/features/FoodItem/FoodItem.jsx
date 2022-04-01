@@ -6,6 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMealAPI } from "./foodItem.api";
 import Cart from "../Cart/Cart";
+import Footer from "../Footer/Footer";
 
 export default function FoodItem() {
   const [visible, setVisible] = useState(false);
@@ -240,6 +241,7 @@ export default function FoodItem() {
           )}
         </div>
       )}
+      <Footer />
     </>
   );
 }

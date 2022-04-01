@@ -1,0 +1,406 @@
+body {
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+}
+.checkoutContainer {
+  min-height: 500px;
+  width: 75%;
+  margin: 100px auto;
+  /* background-color: red; */
+}
+
+.cardParent {
+  display: flex;
+  gap: 1rem;
+}
+
+.leftMainOne {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid #f3f3f3;
+  padding: 1.2rem;
+  margin: 1rem;
+}
+
+.leftMain {
+  width: 55%;
+  height: fit-content;
+}
+.orange {
+  color: #e85826;
+  cursor: pointer;
+}
+.gray {
+  color: #4a4a4a;
+}
+.mailColor {
+  color: #9b9b9b;
+}
+
+.rightMain {
+  /* border: 2px solid black; */
+  width: 43%;
+}
+.rightFirst {
+  background-color: white;
+  border: 1px solid #f3f3f3;
+  padding: 1.2rem;
+  margin: 1rem;
+}
+
+.greenColor {
+  font-size: 2rem;
+  color: #2ebd59;
+  margin-bottom: 0;
+}
+
+.mapContainer {
+  height: fit-content;
+  width: fit-content;
+}
+
+.mapFrame {
+  height: 300px;
+  width: 500px;
+}
+
+.inputTextbox {
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid #9b9b9b;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.addressBtns {
+  width: 30%;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #9b9b9b;
+  cursor: pointer;
+}
+
+.addressBtns:active,
+.addressBtns:focus {
+  border: 1px solid orange;
+}
+
+.savebtn {
+  padding: 5px 2rem;
+  background: linear-gradient(to right, #f5914e, #e85826);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 23px;
+  outline: 0;
+  border: 0;
+  height: 36px;
+}
+
+.foodName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number {
+  margin: 1rem;
+  border: 1px solid #9b9b9b;
+  border-radius: 50px;
+
+}
+
+.minus,
+.plus {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  color: #e85826;
+
+}
+
+.cartInput {
+  height: 20px;
+  width: 50px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  border: none;
+  outline: none;
+}
+
+.freshPass {
+  display: flex;
+  justify-content: space-between;
+}
+
+.greenBtn {
+  color: #2ebd59;
+  font-size: 1rem;
+  line-height: 1.36;
+  border-radius: 4px;
+  background-color: #e2feed;
+  border: 1px solid #9febc3;
+  overflow: hidden;
+  padding: 10px;
+  margin: 10px;
+  opacity: 1;
+  height: auto;
+  width: 70%;
+}
+
+.whiteBtn {
+  font-size: 1rem;
+  line-height: 1.36;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 20px 30px;
+  margin: 10px;
+  opacity: 1;
+  height: auto;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid #9b9b9b;
+  width: 70%;
+}
+
+.walletDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.walletIndiv {
+  height: 150px;
+  width: 45%;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #9b9b9b;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  background-color: white;
+}
+
+.vAlign {
+  padding-top: 10%;
+}
+
+.walletIndiv:active,
+.walletIndiv:focus {
+  border: 1px solid orange;
+}
+
+.formCard {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 60%;
+}
+.formDate {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  height: 30px;
+  width: 25%;
+}
+
+.formName {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 70%;
+}
+
+.formCVV {
+  border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  height: 30px;
+  width: 20%;
+}
+
+.netBankingcontainer{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap ;
+}
+.netBankingIndiv{
+  height: fit-content;
+  width: 100px;
+    border: 1px solid #9b9b9b;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+  background-color: white;
+  margin: 5px;
+}
+.bankLogoIMG{
+  height: 30px;
+  width: 30px;
+}
+
+.netBankingIndiv:active,
+.netBankingIndiv:focus {
+  border: 1px solid orange;
+}
+
+
+.itemPriceContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* media query starts */
+
+@media screen and (max-width: 1524px) {
+.orange {
+  color: #e85826;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.mapFrame {
+  height: 300px;
+  width: 400px;
+}
+.savebtn {
+  padding: 5px 2rem;
+  background: linear-gradient(to right, #f5914e, #e85826);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 100;
+  cursor: pointer;
+  border-radius: 23px;
+  height: 46px;
+}
+}
+
+
+
+@media screen and (max-width: 1252px) {
+  .cardParent {
+    display: block;
+    width: 100%;
+  }  
+  .checkoutContainer {
+    min-height: 500px;
+    width: 100%;
+    margin: 100px auto;
+    /* border: 2px solid red; */
+  }
+  .leftMainOne {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid #f3f3f3;
+    padding: 1.2rem;
+    margin: 1rem;
+    width: 100%;
+  }
+  .leftMain {
+    width: 80%;
+    height: fit-content;
+  }
+
+  .mapFrame {
+    height: 300px;
+    width: 300px;
+  }
+  .rightMain {
+    /* border: 2px solid black; */
+    width: 86%;
+  }
+ 
+}
+
+@media screen and (max-width: 540px) {
+.orange {
+  color: #e85826;
+  cursor: pointer;
+  font-size: 0.5rem;
+}
+
+.mapFrame {
+  height: 300px;
+  width: 400px;
+}
+
+.savebtn {
+  padding: 2px 5px;
+  background: linear-gradient(to right, #f5914e, #e85826);
+  color: white;
+  font-size: 0.5rem;
+  font-weight: 100;
+  cursor: pointer;
+  border-radius: 23px;
+  height: 25px;
+}
+.mapFrame {  
+  display: none;
+}
+
+.greenBtn {
+  font-size: 0.6rem;
+  line-height: 1.36;
+  border-radius: 4px;
+  background-color: #e2feed;
+  border: 1px solid #9febc3;
+  overflow: hidden;
+  padding: 5px;
+  margin: 5px;
+  opacity: 1;
+  height: auto;
+  width: 70%;
+}
+.whiteBtn {
+  font-size: 0.6rem;
+  line-height: 1.36;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px 10px;
+  margin: 5px;
+  opacity: 1;
+  height: auto;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid #9b9b9b;
+  width: 70%;
+}
+.gray{
+  font-size: 1rem;
+}
+.number {
+  margin: 1rem;
+  border: 1px solid #9b9b9b;
+  border-radius: 50px;
+  display: none;
+}
+.minus,
+.plus {
+display: none;
+}
+.greenColor {
+  font-size: 1rem;
+}
+.formCard,.formDate,.formName,.formCVV {
+
+  width: 100%;
+}
+.walletIndiv{
+  height: 70px;
+}
+.addressBtns {
+  height: fit-content;
+
+}
+}
