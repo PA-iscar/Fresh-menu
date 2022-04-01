@@ -245,9 +245,7 @@ const Resend = styled.div`
   margin-top: 8px;
 `;
 
-const UserAuth = () => {
-  const [feature, setFeature] = useState("login");
-
+const UserAuth = ({ feature, setFeature }) => {
   // const [OTP, setOTP] = useState("");
   const [userOTP, setUserOTP] = useState("nnnnn");
   const [isOTPError, setIsOTPError] = useState(false);

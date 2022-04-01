@@ -13,22 +13,23 @@ import {
 } from "@ant-design/icons";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    paritialVisibilityGutter: 60,
+    items: 4,
+    partialVisibilityGutter: 60,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    paritialVisibilityGutter: 50,
+    partialVisibilityGutter: 50,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    paritialVisibilityGutter: 30,
+    partialVisibilityGutter: 30,
   },
 };
 
@@ -49,17 +50,17 @@ export default function NavBar() {
       <section className="navbar">
         <div className="navbar-wrapper">
           <div className="navbar-inner-wrapper">
-            <a href="/" target="_self" className="header-logo">
+            <Link to="/" className="header-logo">
               <img
                 src="https://www.freshmenu.com/images/header-logo.svg"
                 alt="FreshMenu"
               />
-            </a>
+            </Link>
             <div>
               <div className="location-wrapper">
                 <div className="location-inner-wrapper">
                   <span className="lbl">Deliver to:</span>
-                  <span class="address-location">
+                  <span className="address-location">
                     Koramangala, Bengaluru, Karnataka, India{" "}
                   </span>
                 </div>
@@ -120,17 +121,20 @@ export default function NavBar() {
       </section>
       <Carousel
         ssr
-        partialVisbile
+        partialVisible
+        autoPlay="true"
+        infinite="true"
         itemClass="image-item"
         responsive={responsive}
       >
-        {images.slice(0, 5).map((image) => {
+        {images.slice(0, 7).map((image) => {
           return (
             <img
               draggable={false}
-              style={{ width: "90%", height: "90%" }}
+              style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "30px" }}
               src={image}
               alt=""
+              key={image}
             />
           );
         })}

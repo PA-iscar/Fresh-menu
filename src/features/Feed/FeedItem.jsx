@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { GoPrimitiveDot } from "react-icons/go";
 import "./feedItem.css";
+import { Link } from "react-router-dom";
 
 const FeedItem = ({ item }) => {
   return (
@@ -18,13 +19,13 @@ const FeedItem = ({ item }) => {
                   </div>
                 </div>
                 <div className="product_body">
-                  <a>
+                  <Link to="/">
                     <div className="image_container">
-                      <img src={item.image}/>
+                      <img src={item.image} alt=""/>
                     </div>
-                  </a>
+                  </Link>
                   <div className="offers_tag">
-                  <div class="left-shape"></div>
+                  <div className="left-shape"></div>
                   {item.trending}
                   </div>
                   <h3>{item.name}</h3>
