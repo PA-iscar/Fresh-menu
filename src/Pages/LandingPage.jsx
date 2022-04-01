@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import NavBar from "../features/Navbar/NavBar";
+import NavCarousel from "../features/Carousel/NavCarousel";
 import Feed from "../features/Feed/Feed";
-import NavBar from "../features/landingPage/NavBar";
-import UserAuth from "../features/UserAuth/UserAuth";
+import Footer from "../features/Footer/Footer";
+
 const LandingPage = () => {
-  const [feature, setFeature] = useState("");
   return (
     <>
-      <UserAuth feature={feature} setFeature={setFeature} />
       <NavBar />
+      <NavCarousel />
       <Feed />
     </>
   );

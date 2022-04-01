@@ -5,6 +5,8 @@ border-top: 1px solid #e7e9e9;
 }
 
 .row{   
+    width: 1280px;
+    margin: auto;
     display: flex;
     padding-right: 6%;
     padding-left: 6%;
@@ -234,13 +236,18 @@ div.help {
 
 }
 
+.footer_bottom>div{
+    width: 1080px;
+    margin: auto;
+}
+
 .footer_bottom div {
+    box-sizing: border-box;
     /* margin: 0 auto; */
-    padding-right: 6%;
-    padding-left: 6%;
+    /* padding-right: 6%;
+    padding-left: 6%; */
     padding-bottom: 50px;
-    max-width: 1185px;
-    zoom: 1;
+    /* zoom: 1; */
 }
 
 .footer_bottom div:after, .footer_bottom div:before {

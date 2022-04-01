@@ -4,6 +4,7 @@ import checkReducer from "../features/UserAuth/check.slice";
 import loginReducer from "../features/UserAuth/login.slice";
 import filterReducer from "../features/Feed/Filter/filter.slice";
 import mealsReducer from "../features/Feed/feed.slice";
+import mealReducer from "../features/FoodItem/foodItem.slice";
 export const store = configureStore({
   reducer: {
     signup: signupReducer,
@@ -11,5 +12,6 @@ export const store = configureStore({
     login: loginReducer,
     filters: filterReducer,
     meals: mealsReducer,
+    meal: mealReducer,
   },
 });

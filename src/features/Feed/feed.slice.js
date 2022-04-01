@@ -24,9 +24,7 @@ const feedSlice = createSlice({
           ? state.isSorted
           : action.payload.isSorted;
       state.isVeg =
-        action.payload.isVeg === undefined
-          ? state.isVeg
-          : action.payload.isVeg;
+        action.payload.isVeg === undefined ? state.isVeg : action.payload.isVeg;
       state.type = action.payload.type;
       state.vegOnlyMeals = action.payload.vegOnlyMeals || state.vegOnlyMeals;
       state.cuisines = action.payload.cuisine || state.cuisines;

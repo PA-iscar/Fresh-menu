@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getFiltersURL, getMealssURL } from "./feed.selectors";
+import { getFiltersURL, getMealsURL } from "./feed.selectors";
 
 export const getFiltersAPI = createAsyncThunk(
   "Filter/Getfilters",
@@ -11,6 +11,6 @@ export const getFiltersAPI = createAsyncThunk(
 );
 
 export const getMealsAPI = createAsyncThunk("Home/GetMeals", async () => {
-  const response = await axios.get(`${getMealssURL}`);
+  const response = await axios.get(`${getMealsURL}`);
   return response.data;
 });

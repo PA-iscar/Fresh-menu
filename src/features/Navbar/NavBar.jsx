@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 import "antd/dist/antd.css";
 import { Button } from "antd";
+import { Menu, Dropdown } from "antd";
+
 import {
   DownOutlined,
   ShoppingCartOutlined,
@@ -11,42 +13,34 @@ import {
   SettingFilled,
   HeartFilled,
 } from "@ant-design/icons";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-    partialVisibilityGutter: 60,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    partialVisibilityGutter: 50,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    partialVisibilityGutter: 30,
-  },
-};
-
-const images = [
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/2d0df88f-08fd-47ee-9299-42703cc42cd5.jpg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/3d05d982-e3e0-4051-968f-aed93e9a6a4a.jpg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/0dbf9d10-975d-4a2e-9521-6768ef740802.jpg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/210a67bb-07c8-47f1-b17e-d0465244a405.png",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/e6b4ddc9-aa4c-4d82-9568-17f4150d70a6.jpg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/207d2e5a-d747-4c9d-b338-1a96d4785724.jpeg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/456e646b-281d-4c53-9c6b-c388976ed455.jpg",
-  "https://s3-ap-southeast-1.amazonaws.com/foodvista.1/88c83a19-d81b-481b-8604-2304474c50b0.jpg",
-];
+import UserAuth from "../UserAuth/UserAuth";
 
 export default function NavBar() {
+  const [feature, setFeature] = useState("");
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="login"
+        onClick={() => {
+          setFeature("login");
+        }}
+      >
+        <span rel="noopener noreferrer">Log In</span>
+      </Menu.Item>
+      <Menu.Item
+        key="signup"
+        onClick={() => {
+          setFeature("signup");
+        }}
+      >
+        <span rel="noopener noreferrer">Sign Up</span>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <section>
+    <>
+      <UserAuth feature={feature} setFeature={setFeature} />
       <section className="navbar">
         <div className="navbar-wrapper">
           <div className="navbar-inner-wrapper">
@@ -71,7 +65,7 @@ export default function NavBar() {
               </div>
             </div>
             <div className="right-navbar">
-              <a href="/fresh-pass" className="fresh-pass">
+              <Link to="" className="fresh-pass">
                 <CrownOutlined
                   style={{ marginRight: "10px", color: "black" }}
                 />
@@ -79,13 +73,15 @@ export default function NavBar() {
                   <div>FreshPass </div>
                   <div className="coupun">Get extra 20% Off</div>
                 </div>
-              </a>
-              <a href="/fresh-club" className="fresh-club">
+              </Link>
+              <Link to="" className="fresh-club">
                 <div className="fresh-new">NEW</div>
                 <HeartFilled style={{ marginRight: "10px", color: "white" }} />
                 <div className="try-fresh">Try FreshClub</div>
-              </a>
-              <a className="download-app">Download App</a>
+              </Link>
+              <Link className="download-app" to="">
+                Download App
+              </Link>
             </div>
           </div>
           <div style={{ border: "1px solid #e9e9e9" }}></div>
@@ -106,39 +102,26 @@ export default function NavBar() {
                   Offers
                 </Button>
               </div>
-              <a className="common-link">
+              <Link className="common-link" to="">
                 <SettingFilled />
-              </a>
-              <a className="common-link">
-                <UserOutlined />
-              </a>
-              <a className="common-link">
+              </Link>
+              <Link className="common-link" to="">
+                {/* <UserOutlined /> */}
+                <Dropdown
+                  overlay={menu}
+                  arrow={{ pointAtRight: true }}
+                  placement="bottom"
+                >
+                  <UserOutlined />
+                </Dropdown>
+              </Link>
+              <Link className="common-link" to="">
                 <ShoppingCartOutlined />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </section>
-      <Carousel
-        ssr
-        partialVisible
-        autoPlay="true"
-        infinite="true"
-        itemClass="image-item"
-        responsive={responsive}
-      >
-        {images.slice(0, 7).map((image) => {
-          return (
-            <img
-              draggable={false}
-              style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "30px" }}
-              src={image}
-              alt=""
-              key={image}
-            />
-          );
-        })}
-      </Carousel>
-    </section>
+    </>
   );
 }

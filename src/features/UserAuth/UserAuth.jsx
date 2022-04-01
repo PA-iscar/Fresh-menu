@@ -28,7 +28,7 @@ const ModalWrapper = styled.div`
   color: #9b9b9b;
   font-size: 12px;
   letter-spacing: 0.8px;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   background: rgba(235, 235, 235, 0.75);
@@ -475,7 +475,14 @@ const UserAuth = ({ feature, setFeature }) => {
       {feature === "login" || feature === "signup" ? (
         <>
           <GlobalStyle />
-          <ModalWrapper>
+          <ModalWrapper
+            className="modal"
+            onClick={(e) => {
+              if (e.target.classList.contains("modal")) {
+                setFeature("");
+              }
+            }}
+          >
             <Modal>
               <OauthWrapper>
                 <Oauth>

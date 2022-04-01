@@ -33,7 +33,7 @@ const menu = (
 export default function NavBar({ visible, count }) {
   return (
     <div className={visible ? "navbar-visible-wrapper" : "navbar-wrapper"}>
-      {console.log("v", visible)}
+      {/* {console.log("v", visible)} */}
       <div
         className={
           visible ? "navbar-visible-inner-wrapper" : "navbar-inner-wrapper"
@@ -49,7 +49,7 @@ export default function NavBar({ visible, count }) {
           <div className="location-wrapper">
             <div className="location-inner-wrapper">
               <span className="lbl">Deliver to:</span>
-              <span class="address-location">
+              <span className="address-location">
                 Koramangala, Bengaluru, Karnataka, India{" "}
               </span>
             </div>
@@ -80,12 +80,12 @@ export default function NavBar({ visible, count }) {
           </a>
         
          {count==0? <a className="common-link">
-          <span class="cartCount">
+          <span className="cartCount">
                 {count}
             </span>
            <ShoppingCartOutlined />
           </a>: <a className="common_cart_link">
-          <span class="cartCount">
+          <span className="cartCount">
                 {count}
             </span>
            <ShoppingCartOutlined />

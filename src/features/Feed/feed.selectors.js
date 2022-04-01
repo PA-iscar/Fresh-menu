@@ -1,2 +1,2 @@
 export const getFiltersURL = "http://localhost:8000/meals/filters";
-export const getMealssURL = "http://localhost:8000/meals/all";
+export const getMealsURL = "http://localhost:8000/meals/all";
