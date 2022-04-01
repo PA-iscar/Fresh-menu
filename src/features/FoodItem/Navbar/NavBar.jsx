@@ -13,6 +13,7 @@ import Icon, {
   HeartFilled,
 } from "@ant-design/icons";
 import UserAuth from "../../UserAuth/UserAuth";
+import { Link } from "react-router-dom";
 
 export default function NavBar({ visible, count }) {
   const [feature, setFeature] = useState("");
@@ -45,12 +46,12 @@ export default function NavBar({ visible, count }) {
           visible ? "navbar-visible-inner-wrapper" : "navbar-inner-wrapper"
         }
       >
-        <a href="/" target="_self" className="header-logo">
+        <Link to="/" target="_self" className="header-logo">
           <img
             src="https://www.freshmenu.com/images/header-logo.svg"
             alt="FreshMenu"
           />
-        </a>
+        </Link>
         <div>
           <div className="location-wrapper">
             <div className="location-inner-wrapper">
