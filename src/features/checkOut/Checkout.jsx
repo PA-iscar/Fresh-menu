@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -22,6 +22,7 @@ import { CgPaypal } from "react-icons/cg";
 import { FaCcAmazonPay } from "react-icons/fa";
 
 export const Checkout = () => {
+  const [check, setCheck] = useState(false)
   function handleSubmit() {
     alert("Payment Successful...!");
   }
@@ -62,340 +63,380 @@ export const Checkout = () => {
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.872847644795!2d77.72488921526994!3d12.979983518205191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae11f3ee538563%3A0xfb4d6517457c7958!2sNew%20Udupi%20Delicacy%20Veg!5e0!3m2!1sen!2sin!4v1648650226494!5m2!1sen!2sin"
                   ></iframe>
                 </div>
-                <p className={styles.mailColor}>Address comes here</p>
-                <p>
-                  <input
-                    className={styles.inputTextbox}
-                    type="text"
-                    placeholder="Enter address"
-                  />
-                </p>
-                <p>
-                  <input
-                    className={styles.inputTextbox}
-                    type="text"
-                    placeholder="Enter Mobile Number"
-                  />
-                </p>
-                <p className={styles.mailColor}>Address Label</p>
-                <div className={styles.buttonContainer}>
-                  <button className={styles.addressBtns}>
-                    <span>
-                      <GrHome />
-                    </span>
-                    &nbsp;Home
-                  </button>
-                  <button className={styles.addressBtns}>
-                    <span>
-                      <HiOutlineOfficeBuilding />
-                    </span>
-                    &nbsp;Office
-                  </button>
-                  <button className={styles.addressBtns}>
-                    <span>
-                      <BsDoorOpen />
-                    </span>
-                    &nbsp;Others
-                  </button>
-                </div>
-                <p></p>
-                <p>
-                  <button className={styles.savebtn}>SAVE AND CONTINUE</button>
-                </p>
+                {/* <p className={styles.mailColor}>Address comes here</p> */}
+                <form>
+                  <p>
+                    <input
+                      className={styles.inputTextbox}
+                      type="text"
+                      placeholder="Enter address"
+                      minlength="10"
+                      required
+                    />
+                  </p>
+                  <p>
+                    <input
+                      className={styles.inputTextbox}
+                      type="number"
+                      placeholder="Enter Mobile Number"
+                      pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+                      required
+                    />
+                  </p>
+                  <p className={styles.mailColor}>Address Label</p>
+                  <div className={styles.buttonContainer}>
+                    <button
+                      className={styles.addressBtns}
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                    >
+                      <span>
+                        <GrHome />
+                      </span>
+                      &nbsp;Home
+                    </button>
+                    <button
+                      className={styles.addressBtns}
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                    >
+                      <span>
+                        <HiOutlineOfficeBuilding />
+                      </span>
+                      &nbsp;Office
+                    </button>
+                    <button
+                      className={styles.addressBtns}
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                    >
+                      <span>
+                        <BsDoorOpen />
+                      </span>
+                      &nbsp;Others
+                    </button>
+                  </div>
+                  <p></p>
+                  <p>
+                    <button
+                      className={styles.savebtn}
+                      onClick={(e) => {
+                        setCheck(true);
+                         e.preventDefault();
+                      }}
+                     
+                    >
+                      SAVE AND CONTINUE
+                    </button>
+                  </p>
+                </form>
               </div>
               <div className={styles.rightOne}>
                 <h3 className={styles.orange}>Change</h3>{" "}
               </div>
             </div>
-            <div className={styles.leftMainOne} style={{ display: "block" }}>
-              <div className={styles.leftOne}>
-                {" "}
-                <h2 className={styles.gray}>
-                  <span>
-                    <IoWalletOutline />
-                  </span>{" "}
-                  Payment Method
-                </h2>
-                <h4 className={styles.gray}>Offers</h4>
-                <img
-                  src="/Mobikwik.png"
-                  alt="mobikwik"
-                  height="30px"
-                  width="45px"
-                />
-                <p>Mobikwik</p>
-                <p className={styles.mailColor}>Get assured Rs 150 cashback</p>
-                <p className={styles.orange}>Avail Offer</p>
-              </div>
-              <div className="">
-                <Tabs defaultTab="vertical-tab-one" vertical>
-                  <TabList>
-                    <Tab tabFor="vertical-tab-one">Cash</Tab>
-                    <Tab tabFor="vertical-tab-two">PhonePe</Tab>
-                    <Tab tabFor="vertical-tab-three">Wallets</Tab>
-                    <Tab tabFor="vertical-tab-four">PayPal</Tab>
-                    <Tab tabFor="vertical-tab-five">
-                      Cards and Ticket Restaurant
-                    </Tab>
-                    <Tab tabFor="vertical-tab-six">Sodexo Meal Card</Tab>
-                    <Tab tabFor="vertical-tab-seven">NetBanking</Tab>
-                  </TabList>
-                  <TabPanel tabId="vertical-tab-one">
-                    <div>
-                      <p>
-                        <BsCash size={50} />
-                      </p>
-                    </div>
-                    <div>
-                      <h3>Cash</h3>
-                    </div>
-                    <div>
-                      <p className={styles.mailColor}>
-                        Pay with cash on deliver
-                      </p>
-                    </div>
-                    <div>
-                      <button
-                        className={styles.savebtn}
-                        onClick={() => handleSubmit()}
-                      >
-                        PLACE ORDER. ₹75
-                      </button>
-                    </div>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-two">
-                    <div>
-                      <p>
-                        <SiPhonepe size={50} />
-                      </p>
-                    </div>
-                    <div>
-                      <p>
-                        <button
-                          className={styles.savebtn}
-                          onClick={() => handleSubmit()}
-                        >
-                          PLACE ORDER. ₹75
-                        </button>
-                      </p>
-                    </div>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-three">
-                    <p>
-                      <div className={styles.walletDiv}>
-                        <button className={styles.walletIndiv}>
-                          <SiSamsungpay
-                            style={{ color: "violet" }}
-                            className={styles.vAlign}
-                            size={40}
-                          />
-                        </button>
-                        <button className={styles.walletIndiv}>
-                          <SiPaytm
-                            style={{ color: "blue" }}
-                            className={styles.vAlign}
-                            size={40}
-                          />
-                        </button>
-                        <button className={styles.walletIndiv}>
-                          <SiSwiggy
-                            style={{ color: "orange" }}
-                            className={styles.vAlign}
-                            size={40}
-                          />
-                        </button>
-                        <button className={styles.walletIndiv}>
-                          <SiFoodpanda
-                            style={{ color: "black" }}
-                            className={styles.vAlign}
-                            size={40}
-                          />
-                        </button>
-                        <button className={styles.walletIndiv}>
-                          <CgPaypal
-                            style={{ color: "red" }}
-                            className={styles.vAlign}
-                            size={40}
-                          />
-                        </button>
-                        <button
-                          style={{ color: "gray" }}
-                          className={styles.walletIndiv}
-                        >
-                          <FaCcAmazonPay className={styles.vAlign} size={40} />
-                        </button>
-                      </div>
-                      <div>
+
+            <div className={styles.showOrHide}>
+              {check === true &&
+                <div className={styles.leftMainOne} style={{ display: "block" }}>
+                  <div className={styles.leftOne}>
+                    {" "}
+                    <h2 className={styles.gray}>
+                      <span>
+                        <IoWalletOutline />
+                      </span>{" "}
+                      Payment Method
+                    </h2>
+                    <h4 className={styles.gray}>Offers</h4>
+                    <img
+                      src="/Mobikwik.png"
+                      alt="mobikwik"
+                      height="30px"
+                      width="45px"
+                    />
+                    <p>Mobikwik</p>
+                    <p className={styles.mailColor}>Get assured Rs 150 cashback</p>
+                    <p className={styles.orange}>Avail Offer</p>
+                  </div>
+                  <div className="">
+                    <Tabs defaultTab="vertical-tab-one" vertical>
+                      <TabList>
+                        <Tab tabFor="vertical-tab-one">Cash</Tab>
+                        <Tab tabFor="vertical-tab-two">PhonePe</Tab>
+                        <Tab tabFor="vertical-tab-three">Wallets</Tab>
+                        <Tab tabFor="vertical-tab-four">PayPal</Tab>
+                        <Tab tabFor="vertical-tab-five">
+                          Cards and Ticket Restaurant
+                        </Tab>
+                        <Tab tabFor="vertical-tab-six">Sodexo Meal Card</Tab>
+                        <Tab tabFor="vertical-tab-seven">NetBanking</Tab>
+                      </TabList>
+                      <TabPanel tabId="vertical-tab-one">
+                        <div>
+                          <p>
+                            <BsCash size={50} />
+                          </p>
+                        </div>
+                        <div>
+                          <h3>Cash</h3>
+                        </div>
+                        <div>
+                          <p className={styles.mailColor}>
+                            Pay with cash on deliver
+                          </p>
+                        </div>
+                        <div>
+                          <button
+                            className={styles.savebtn}
+                            onClick={() => handleSubmit()}
+                          >
+                            PLACE ORDER. ₹75
+                          </button>
+                        </div>
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-two">
+                        <div>
+                          <p>
+                            <SiPhonepe size={50} />
+                          </p>
+                        </div>
+                        <div>
+                          <p>
+                            <button
+                              className={styles.savebtn}
+                              onClick={() => handleSubmit()}
+                            >
+                              PLACE ORDER. ₹75
+                            </button>
+                          </p>
+                        </div>
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-three">
+                        <p>
+                          <div className={styles.walletDiv}>
+                            <button className={styles.walletIndiv}>
+                              <SiSamsungpay
+                                style={{ color: "violet" }}
+                                className={styles.vAlign}
+                                size={40}
+                              />
+                            </button>
+                            <button className={styles.walletIndiv}>
+                              <SiPaytm
+                                style={{ color: "blue" }}
+                                className={styles.vAlign}
+                                size={40}
+                              />
+                            </button>
+                            <button className={styles.walletIndiv}>
+                              <SiSwiggy
+                                style={{ color: "orange" }}
+                                className={styles.vAlign}
+                                size={40}
+                              />
+                            </button>
+                            <button className={styles.walletIndiv}>
+                              <SiFoodpanda
+                                style={{ color: "black" }}
+                                className={styles.vAlign}
+                                size={40}
+                              />
+                            </button>
+                            <button className={styles.walletIndiv}>
+                              <CgPaypal
+                                style={{ color: "red" }}
+                                className={styles.vAlign}
+                                size={40}
+                              />
+                            </button>
+                            <button
+                              style={{ color: "gray" }}
+                              className={styles.walletIndiv}
+                            >
+                              <FaCcAmazonPay className={styles.vAlign} size={40} />
+                            </button>
+                          </div>
+                          <div>
+                            <p>
+                              <button
+                                className={styles.savebtn}
+                                style={{ marginLeft: "15px" }}
+                                onClick={() => handleSubmit()}
+                              >
+                                PLACE ORDER. ₹75
+                              </button>
+                            </p>
+                          </div>
+                        </p>
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-four">
+                        <p>
+                          <input type="radio" name="paypal" />
+                          <GrPaypal size={20} />
+                        </p>
+                        <p className={styles.mailColor}>
+                          Faster way to Pay (Credit Card users only)
+                          <br />
+                          Opt-in to skip OTP flow. (Valid on orders above 2000 via
+                          Credit Cards only) <br />
+                          Your money, details and purchases are protected to PayPal.{" "}
+                          <br />
+                          Manage and cancel automatic payments anytime
+                        </p>
+                        <br />
+                        <p>
+                          <input type="radio" name="paypal" />
+                          <GrPaypal size={20} />
+                        </p>
+                        <p className={styles.mailColor}>
+                          PayPal regular checkout (Credit Card and Debit Card users
+                          only)
+                        </p>
                         <p>
                           <button
                             className={styles.savebtn}
-                            style={{ marginLeft: "15px" }}
                             onClick={() => handleSubmit()}
                           >
                             PLACE ORDER. ₹75
                           </button>
                         </p>
-                      </div>
-                    </p>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-four">
-                    <p>
-                      <input type="radio" name="paypal" />
-                      <GrPaypal size={20} />
-                    </p>
-                    <p className={styles.mailColor}>
-                      Faster way to Pay (Credit Card users only)
-                      <br />
-                      Opt-in to skip OTP flow. (Valid on orders above 2000 via
-                      Credit Cards only) <br />
-                      Your money, details and purchases are protected to PayPal.{" "}
-                      <br />
-                      Manage and cancel automatic payments anytime
-                    </p>
-                    <br />
-                    <p>
-                      <input type="radio" name="paypal" />
-                      <GrPaypal size={20} />
-                    </p>
-                    <p className={styles.mailColor}>
-                      PayPal regular checkout (Credit Card and Debit Card users
-                      only)
-                    </p>
-                    <p>
-                      <button
-                        className={styles.savebtn}
-                        onClick={() => handleSubmit()}
-                      >
-                        PLACE ORDER. ₹75
-                      </button>
-                    </p>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-five">
-                    <p>
-                      <span>
-                        <BsCreditCard size={50} />
-                      </span>
-                    </p>
-                    <p>New Card Details</p>
-                    <p>
-                      <input
-                        type="text"
-                        placeholder="Card Number"
-                        className={styles.formCard}
-                      />
-                      <input type="date" className={styles.formDate} />
-                    </p>
-                    <p>
-                      <input
-                        type="text"
-                        placeholder="Full Name"
-                        className={styles.formName}
-                      />
-                      <input
-                        type="number"
-                        placeholder="CVV"
-                        className={styles.formCVV}
-                      />
-                    </p>
-                    <p>
-                      <input type="checkbox" />
-                      &nbsp;Save card for quicker checkout
-                    </p>
-                    <p>
-                      <button
-                        className={styles.savebtn}
-                        style={{ marginLeft: "15px" }}
-                        onClick={() => handleSubmit()}
-                      >
-                        PLACE ORDER. ₹75
-                      </button>
-                    </p>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-six">
-                    <p>
-                      <span>
-                        <BsCreditCard size={50} style={{ color: "orange" }} />
-                      </span>
-                    </p>
-                    <p>New Sodexo Card</p>
-                    <p>
-                      <button
-                        className={styles.savebtn}
-                        onClick={() => handleSubmit()}
-                      >
-                        ADD CARD AND PLACE ORDER
-                      </button>
-                    </p>
-                  </TabPanel>
-                  <TabPanel tabId="vertical-tab-seven">
-                    <p></p>
-                    <div className={styles.netBankingcontainer}>
-                      <button className={styles.netBankingIndiv}>
-                        <img
-                          src="https://www.logotaglines.com/wp-content/uploads/2016/08/ICICI-Logo.png"
-                          alt="ICICI"
-                          className={styles.bankLogoIMG}
-                        />
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-five">
                         <p>
-                          ICICI <br />
-                          Bank
+                          <span>
+                            <BsCreditCard size={50} />
+                          </span>
                         </p>
-                      </button>
-                      <button className={styles.netBankingIndiv}>
-                        <img
-                          src="https://www.vhv.rs/dpng/d/107-1073363_hdfc-bank-hd-png-download.png"
-                          alt="HDFC"
-                          className={styles.bankLogoIMG}
-                        />
+                        <p>New Card Details</p>
+                        <form>
+                          <p>
+                            <input
+                              type="text"
+                              placeholder="Card Number"
+                              className={styles.formCard}
+                              required
+                            />
+                            <input type="date" className={styles.formDate} />
+                          </p>
+                          <p>
+                            <input
+                              type="text"
+                              placeholder="Full Name"
+                              className={styles.formName}
+                              required
+                            />
+                            <input
+                              type="number"
+                              placeholder="CVV"
+                              className={styles.formCVV}
+                              maxLength="3"
+                              required
+                            />
+                          </p>
+                          <p>
+                            <input type="checkbox" />
+                            &nbsp;Save card for quicker checkout
+                          </p>
+                          <p>
+                            <button
+                              className={styles.savebtn}
+                              style={{ marginLeft: "15px" }}
+                              onClick={() => handleSubmit()}
+                            >
+                              PLACE ORDER. ₹75
+                            </button>
+                          </p>
+                        </form>
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-six">
                         <p>
-                          HDFC <br />
-                          Bank
+                          <span>
+                            <BsCreditCard size={50} style={{ color: "orange" }} />
+                          </span>
                         </p>
-                      </button>
-                      <button className={styles.netBankingIndiv}>
-                        <img
-                          src="https://w7.pngwing.com/pngs/509/329/png-transparent-axis-bank-connaught-place-new-delhi-security-business-bank-purple-angle-violet-thumbnail.png"
-                          alt="AXIS"
-                          className={styles.bankLogoIMG}
-                        />
+                        <p>New Sodexo Card</p>
                         <p>
-                          Axis <br />
-                          Bank
+                          <button
+                            className={styles.savebtn}
+                            onClick={() => handleSubmit()}
+                          >
+                            PLACE ORDER
+                          </button>
                         </p>
-                      </button>
-                      <button className={styles.netBankingIndiv}>
-                        <img
-                          src="https://www.examsplanner.in/media/scholarship/kotak_shiksha_nidhi_scholarship.png"
-                          alt="KOTAK"
-                          className={styles.bankLogoIMG}
-                        />
+                      </TabPanel>
+                      <TabPanel tabId="vertical-tab-seven">
+                        <p></p>
+                        <div className={styles.netBankingcontainer}>
+                          <button className={styles.netBankingIndiv}>
+                            <img
+                              src="https://www.logotaglines.com/wp-content/uploads/2016/08/ICICI-Logo.png"
+                              alt="ICICI"
+                              className={styles.bankLogoIMG}
+                            />
+                            <p>
+                              ICICI <br />
+                              Bank
+                            </p>
+                          </button>
+                          <button className={styles.netBankingIndiv}>
+                            <img
+                              src="https://www.vhv.rs/dpng/d/107-1073363_hdfc-bank-hd-png-download.png"
+                              alt="HDFC"
+                              className={styles.bankLogoIMG}
+                            />
+                            <p>
+                              HDFC <br />
+                              Bank
+                            </p>
+                          </button>
+                          <button className={styles.netBankingIndiv}>
+                            <img
+                              src="https://w7.pngwing.com/pngs/509/329/png-transparent-axis-bank-connaught-place-new-delhi-security-business-bank-purple-angle-violet-thumbnail.png"
+                              alt="AXIS"
+                              className={styles.bankLogoIMG}
+                            />
+                            <p>
+                              Axis <br />
+                              Bank
+                            </p>
+                          </button>
+                          <button className={styles.netBankingIndiv}>
+                            <img
+                              src="https://www.examsplanner.in/media/scholarship/kotak_shiksha_nidhi_scholarship.png"
+                              alt="KOTAK"
+                              className={styles.bankLogoIMG}
+                            />
+                            <p>
+                              Kotak <br />
+                              Bank
+                            </p>
+                          </button>
+                        </div>
+                        <p className={styles.mailColor}>Other Banks</p>
                         <p>
-                          Kotak <br />
-                          Bank
+                          <select className={styles.formCard}>
+                            <option>Bank Of India</option>
+                            <option>SBI</option>
+                            <option>Canara Bank</option>
+                            <option>IndusInd Bank</option>
+                            <option>Yes Bank</option>
+                          </select>
                         </p>
-                      </button>
-                    </div>
-                    <p className={styles.mailColor}>Other Banks</p>
-                    <p>
-                      <select className={styles.formCard}>
-                        <option>Bank Of India</option>
-                        <option>SBI</option>
-                        <option>Canara Bank</option>
-                        <option>IndusInd Bank</option>
-                        <option>Yes Bank</option>
-                      </select>
-                    </p>
-                    <p>
-                      <button
-                        className={styles.savebtn}
-                        onClick={() => handleSubmit()}
-                      >
-                        PLACE ORDER. ₹75
-                      </button>
-                    </p>
-                  </TabPanel>
-                </Tabs>
-              </div>
+                        <p>
+                          <button
+                            className={styles.savebtn}
+                            onClick={() => handleSubmit()}
+                          >
+                            PLACE ORDER. ₹75
+                          </button>
+                        </p>
+                      </TabPanel>
+                    </Tabs>
+                  </div>
+                </div>}
             </div>
           </div>
           <div className={styles.rightMain}>
