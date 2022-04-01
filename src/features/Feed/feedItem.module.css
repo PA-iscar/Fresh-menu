@@ -110,7 +110,7 @@
   box-sizing: border-box;
 }
 
-.offers_tag .left-shape {
+.offers_tag .left_shape {
   left: 0;
   bottom: -6px;
   border-style: solid;
