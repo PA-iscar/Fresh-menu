@@ -26,10 +26,14 @@ const FeedItem = ({ item }) => {
                 <img src={item.image} alt="" />
               </div>
             </Link>
-            <div className={style.offers_tag}>
-              <div className={style.left_shape}></div>
-              {item.trending}
-            </div>
+            {item.trending !== null ? (
+              <div className={style.offers_tag}>
+                <div className={style.left_shape}></div>
+                {item.trending}
+              </div>
+            ) : (
+              <></>
+            )}
             <h3>{item.name}</h3>
             <div className={style.product_body_actions}>
               <div className={style.product_body_actions_price}>

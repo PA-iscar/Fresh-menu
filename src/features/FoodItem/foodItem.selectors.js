@@ -1,1 +1,1 @@
-export const getMealURL = "http://localhost:8000/meals/";
+export const getMealURL = "http://localhost:8000/meals";

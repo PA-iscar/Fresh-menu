@@ -4,10 +4,12 @@ import FiltersMenu from "./Filter/FiltersMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { getFiltersAPI, getMealsAPI } from "./feed.api";
 import FeedItem from "./FeedItem";
+import { getCartAPI } from "../Cart/cart.api";
 
 const Feed = () => {
   const selectedMeals = useSelector((state) => state.meals.selectedMeals);
   const isLoading = useSelector((state) => state.meals.isLoading);
+  const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,13 +17,17 @@ const Feed = () => {
     dispatch(getFiltersAction);
     const getMealsAction = getMealsAPI();
     dispatch(getMealsAction);
-  }, [dispatch]);
+    if (user._id) {
+      const getCartAction = getCartAPI({ id: user._id });
+      dispatch(getCartAction);
+    }
+  }, [dispatch, user]);
 
   return (
     <>
       <div className={style.container}>
         <FiltersMenu />
-        <hr className={style.divider} />
+        {/* <hr className={style.divider} /> */}
         <div className={style.feedContainer}>
           <div className={style.categories}>
             {!isLoading ? (

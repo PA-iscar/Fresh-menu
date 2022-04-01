@@ -53,7 +53,7 @@ const FiltersMenu = () => {
     <>
       {" "}
       <div className={style.filterContainer}>
-        <span>CATEGORIES</span>
+        <span className={style.categoryWord}>CATEGORIES</span>
         <div className={style.filters}>
           <div className={cx(style.filter, style.button)} onClick={toggleVeg}>
             VEG

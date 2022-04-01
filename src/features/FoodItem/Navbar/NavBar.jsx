@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 import "antd/dist/antd.css";
-import { Tooltip, Button } from 'antd';
-import { Menu, Dropdown } from 'antd';
+import { Tooltip, Button } from "antd";
+import { Menu, Dropdown } from "antd";
 // import { DownOutlined } from "@ant-design/icons";
 import Icon, {
   DownOutlined,
@@ -12,27 +12,33 @@ import Icon, {
   HeartOutlined,
   HeartFilled,
 } from "@ant-design/icons";
-
-
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="">
-        Log In
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="">
-        Sign Up
-      </a>
-    </Menu.Item>
-    
-  </Menu>
-);
+import UserAuth from "../../UserAuth/UserAuth";
 
 export default function NavBar({ visible, count }) {
+  const [feature, setFeature] = useState("");
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="login"
+        onClick={() => {
+          setFeature("login");
+        }}
+      >
+        <span rel="noopener noreferrer">Log In</span>
+      </Menu.Item>
+      <Menu.Item
+        key="signup"
+        onClick={() => {
+          setFeature("signup");
+        }}
+      >
+        <span rel="noopener noreferrer">Sign Up</span>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <div className={visible ? "navbar-visible-wrapper" : "navbar-wrapper"}>
+      <UserAuth feature={feature} setFeature={setFeature} />
       {/* {console.log("v", visible)} */}
       <div
         className={
@@ -66,31 +72,32 @@ export default function NavBar({ visible, count }) {
             <div className="try-fresh">Try FreshClub</div>
           </a>
           <a className="common-link">
-          <Tooltip placement="bottom" title="Help Center">
-          <SettingFilled />
-      </Tooltip>
-           
-           
+            <Tooltip placement="bottom" title="Help Center">
+              <SettingFilled />
+            </Tooltip>
           </a>
-          
+
           <a className="common-link">
-          <Dropdown overlay={menu} arrow={{ pointAtRight: true }} placement="bottom">
-            <UserOutlined />
+            <Dropdown
+              overlay={menu}
+              arrow={{ pointAtRight: true }}
+              placement="bottom"
+            >
+              <UserOutlined />
             </Dropdown>
           </a>
-        
-         {count==0? <a className="common-link">
-          <span className="cartCount">
-                {count}
-            </span>
-           <ShoppingCartOutlined />
-          </a>: <a className="common_cart_link">
-          <span className="cartCount">
-                {count}
-            </span>
-           <ShoppingCartOutlined />
-          </a>}
-         
+
+          {count == 0 ? (
+            <a className="common-link">
+              <span className="cartCount">{count}</span>
+              <ShoppingCartOutlined />
+            </a>
+          ) : (
+            <a className="common_cart_link">
+              <span className="cartCount">{count}</span>
+              <ShoppingCartOutlined />
+            </a>
+          )}
         </div>
       </div>
     </div>
