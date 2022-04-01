@@ -98,6 +98,7 @@ export const Checkout = () => {
                     &nbsp;Others
                   </button>
                 </div>
+                <p></p>
                 <p>
                   <button className={styles.savebtn}>SAVE AND CONTINUE</button>
                 </p>
@@ -487,7 +488,9 @@ export const Checkout = () => {
 
               <div className={styles.itemPriceContainer}>
                 <div className={styles.priceIndivOne}>
-                  <h2 className={styles.gray} style={{marginTop:"1px"}}>Payable</h2>
+                  <h2 className={styles.gray} style={{ marginTop: "1px" }}>
+                    Payable
+                  </h2>
                 </div>
                 <div className={styles.priceIndivTwo}>₹108.00</div>
               </div>
