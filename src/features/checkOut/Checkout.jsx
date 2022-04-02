@@ -202,7 +202,13 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹{totalAmount}
+                            PLACE ORDER. ₹
+                            {Math.ceil(
+                              totalAmount +
+                                totalAmount * 0.05 +
+                                totalAmount * 0.025 +
+                                totalAmount * 0.025
+                            )}
                           </button>
                         </div>
                       </TabPanel>
@@ -218,7 +224,13 @@ export const Checkout = () => {
                               className={styles.savebtn}
                               onClick={() => handleSubmit()}
                             >
-                              PLACE ORDER. ₹{totalAmount}
+                              PLACE ORDER. ₹
+                              {Math.ceil(
+                                totalAmount +
+                                  totalAmount * 0.05 +
+                                  totalAmount * 0.025 +
+                                  totalAmount * 0.025
+                              )}
                             </button>
                           </p>
                         </div>
@@ -278,7 +290,13 @@ export const Checkout = () => {
                                 style={{ marginLeft: "15px" }}
                                 onClick={() => handleSubmit()}
                               >
-                                PLACE ORDER. ₹{totalAmount}
+                                PLACE ORDER. ₹
+                                {Math.ceil(
+                                  totalAmount +
+                                    totalAmount * 0.05 +
+                                    totalAmount * 0.025 +
+                                    totalAmount * 0.025
+                                )}
                               </button>
                             </p>
                           </div>
@@ -312,7 +330,13 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹{totalAmount}
+                            PLACE ORDER. ₹
+                            {Math.ceil(
+                              totalAmount +
+                                totalAmount * 0.05 +
+                                totalAmount * 0.025 +
+                                totalAmount * 0.025
+                            )}
                           </button>
                         </p>
                       </TabPanel>
@@ -358,7 +382,13 @@ export const Checkout = () => {
                               style={{ marginLeft: "15px" }}
                               onClick={() => handleSubmit()}
                             >
-                              PLACE ORDER. ₹{totalAmount}
+                              PLACE ORDER. ₹
+                              {Math.ceil(
+                                totalAmount +
+                                  totalAmount * 0.05 +
+                                  totalAmount * 0.025 +
+                                  totalAmount * 0.025
+                              )}
                             </button>
                           </p>
                         </form>
@@ -445,7 +475,13 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹{totalAmount}
+                            PLACE ORDER. ₹
+                            {Math.ceil(
+                              totalAmount +
+                                totalAmount * 0.05 +
+                                totalAmount * 0.025 +
+                                totalAmount * 0.025
+                            )}
                           </button>
                         </p>
                       </TabPanel>
@@ -470,22 +506,28 @@ export const Checkout = () => {
               <h2 className={styles.gray}>Your Order</h2>
               {/* <div>Put slider here</div> */}
               <hr />
-              {meals.map((m)=>{
-                return  <div className={styles.foodName}>
-                <p>
-                  <span>
-                    <RiRadioButtonLine style={{ color: "green" }} />
-                  </span>{" "}
-                  &nbsp; {m.name}
-                </p>
-                <div className={styles.number}>
-                  <span className={styles.minus}>-</span>
-                  <input type="text" value={m.count} className={styles.cartInput} />
-                  <span className={styles.plus}>+</span>
-                </div>
-              </div>
+              {meals.map((m) => {
+                return (
+                  <div className={styles.foodName}>
+                    <p>
+                      <span>
+                        <RiRadioButtonLine style={{ color: "green" }} />
+                      </span>{" "}
+                      &nbsp; {m.name}
+                    </p>
+                    <div className={styles.number}>
+                      <span className={styles.minus}>-</span>
+                      <input
+                        type="text"
+                        value={m.count}
+                        className={styles.cartInput}
+                      />
+                      <span className={styles.plus}>+</span>
+                    </div>
+                  </div>
+                );
               })}
-             
+
               <div className={styles.freshPass}>
                 <div className={styles.leftPass}>
                   <p>FRESHPASS</p>
@@ -539,9 +581,9 @@ export const Checkout = () => {
                 <div className={styles.priceIndivTwo}>
                   <p>₹{totalAmount}.00</p>
                   <p className={styles.mailColor}>+ ₹20.00</p>
-                  <p>+ ₹{totalAmount*0.05}</p>
-                  <p className={styles.mailColor}>+ ₹{totalAmount*0.025}</p>
-                  <p className={styles.mailColor}>+ ₹{totalAmount*0.025}</p>
+                  <p>+ ₹{totalAmount * 0.05}</p>
+                  <p className={styles.mailColor}>+ ₹{totalAmount * 0.025}</p>
+                  <p className={styles.mailColor}>+ ₹{totalAmount * 0.025}</p>
                 </div>
               </div>
               <hr />
@@ -552,7 +594,15 @@ export const Checkout = () => {
                     Payable
                   </h2>
                 </div>
-                <div className={styles.priceIndivTwo}>₹{totalAmount+totalAmount*0.05+totalAmount*0.025+totalAmount*0.025}</div>
+                <div className={styles.priceIndivTwo}>
+                  ₹
+                  {Math.ceil(
+                    totalAmount +
+                      totalAmount * 0.05 +
+                      totalAmount * 0.025 +
+                      totalAmount * 0.025
+                  )}
+                </div>
               </div>
             </div>
 
