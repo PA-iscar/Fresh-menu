@@ -24,8 +24,8 @@ import NavBar from "../FoodItem/Navbar/NavBar";
 import { loadLocalData } from "../LocalStorage/localStorage";
 
 export const Checkout = () => {
-  const totalAmount=loadLocalData("total");
-  const meals=loadLocalData("meals")
+  const totalAmount = loadLocalData("total");
+  const meals = loadLocalData("meals");
   const [check, setCheck] = useState(false);
   function handleSubmit() {
     alert("Payment Successful...!");
@@ -45,7 +45,7 @@ export const Checkout = () => {
                   </span>{" "}
                   Logged In As
                 </h2>
-                <p className={styles.mailColor}>abhishek@gmail.com</p>
+                <p className={styles.mailColor}>abhiaro27@gmail.com</p>
               </div>
               <div className={styles.rightOne}>
                 <h3 className={styles.orange}>Details</h3>{" "}
