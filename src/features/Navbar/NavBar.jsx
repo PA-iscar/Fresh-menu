@@ -15,9 +15,14 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import UserAuth from "../UserAuth/UserAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUserAPI } from "../UserAuth/auth.api";
+import { resetCheck } from "../UserAuth/check.slice";
 
 export default function NavBar() {
   const [feature, setFeature] = useState("");
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+  const dispatch = useDispatch();
   const menu = (
     <Menu>
       <Menu.Item
@@ -36,6 +41,54 @@ export default function NavBar() {
       >
         <span rel="noopener noreferrer">Sign Up</span>
       </Menu.Item>
+    </Menu>
+  );
+  const menu2 = (
+    <Menu>
+      <Menu.ItemGroup title="YOUR ACCOUNT">
+        <Menu.Item>
+          <Link to="">Profile Details</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Address Book</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">
+            FreshMoney&nbsp;&nbsp;
+            <span style={{ color: "#287ee2" }}> ₹ 100 CASHBACK</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Gift Card</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Payment Methods</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Favourites</Link>
+        </Menu.Item>
+      </Menu.ItemGroup>
+      <Menu.ItemGroup title="GENERAL">
+        <Menu.Item>
+          <Link to="">Order History</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Corporate Ordering</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link
+            to=""
+            onClick={() => {
+              const logoutAction = logoutUserAPI();
+              dispatch(logoutAction);
+              const resetCheckAction = resetCheck();
+              dispatch(resetCheckAction);
+            }}
+          >
+            Logout
+          </Link>
+        </Menu.Item>
+      </Menu.ItemGroup>
     </Menu>
   );
   return (
@@ -108,7 +161,7 @@ export default function NavBar() {
               <Link className="common-link" to="">
                 {/* <UserOutlined /> */}
                 <Dropdown
-                  overlay={menu}
+                  overlay={isLoggedin ? menu2 : menu}
                   arrow={{ pointAtRight: true }}
                   placement="bottom"
                 >

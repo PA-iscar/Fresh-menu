@@ -10,20 +10,35 @@ const FeedItem = ({ item }) => {
         <div className={style.product}>
           <div className={style.new_header}>
             <div className={style.new_header_icon}>
-              {item.category=="Vegetarian"? <GoPrimitiveDot
-                style={{
-                  border: "1px solid",
-                  color: "green",
-                  marginRight: "5px",
-                }}
-              />: <GoPrimitiveDot
-              style={{
-                border: "1px solid",
-                color: "red",
-                marginRight: "5px",
-              }}
-            />}
-             
+              {item.type === "Veg" ? (
+                <GoPrimitiveDot
+                  style={{
+                    border: "1px solid",
+                    fontSize: "14px",
+                    color: "limegreen",
+                    marginRight: "5px",
+                  }}
+                />
+              ) : item.type === "Non Veg" ? (
+                <GoPrimitiveDot
+                  style={{
+                    border: "1px solid",
+                    fontSize: "14px",
+                    color: "red",
+                    marginRight: "5px",
+                  }}
+                />
+              ) : (
+                <GoPrimitiveDot
+                  style={{
+                    border: "1px solid",
+                    fontSize: "14px",
+                    color: "brown",
+                    marginRight: "5px",
+                  }}
+                />
+              )}
+
               <div>{item.cuisine}</div>
             </div>
           </div>

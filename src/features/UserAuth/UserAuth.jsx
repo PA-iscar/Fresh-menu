@@ -364,6 +364,7 @@ const UserAuth = ({ feature, setFeature }) => {
   const login = () => {
     const loginAction = loginUserAPI({ id: userID, userOTP });
     dispatch(loginAction);
+    setFeature("");
   };
 
   const resetModal = () => {
@@ -435,7 +436,6 @@ const UserAuth = ({ feature, setFeature }) => {
     if (isLoggedin) {
       setIsOTPError(false);
       setOTPErrorMessage("");
-      window.alert("logged in");
     }
   }, [loginError, isLoggedin]);
 

@@ -15,10 +15,16 @@ import Icon, {
 } from "@ant-design/icons";
 import UserAuth from "../../UserAuth/UserAuth";
 import { Link } from "react-router-dom";
+import { logoutUserAPI } from "../../UserAuth/auth.api";
+import { resetCheck } from "../../UserAuth/check.slice";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function NavBar({ visible}) {
-  var count=loadLocalData('cart')
+export default function NavBar({ visible }) {
+  var count = loadLocalData("cart");
   const [feature, setFeature] = useState("");
+  const dispatch = useDispatch();
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+
   const menu = (
     <Menu>
       <Menu.Item
@@ -37,6 +43,54 @@ export default function NavBar({ visible}) {
       >
         <span rel="noopener noreferrer">Sign Up</span>
       </Menu.Item>
+    </Menu>
+  );
+  const menu2 = (
+    <Menu>
+      <Menu.ItemGroup title="YOUR ACCOUNT">
+        <Menu.Item>
+          <Link to="">Profile Details</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Address Book</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">
+            FreshMoney&nbsp;&nbsp;
+            <span style={{ color: "#287ee2" }}> ₹ 100 CASHBACK</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Gift Card</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Payment Methods</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Favourites</Link>
+        </Menu.Item>
+      </Menu.ItemGroup>
+      <Menu.ItemGroup title="GENERAL">
+        <Menu.Item>
+          <Link to="">Order History</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="">Corporate Ordering</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link
+            to=""
+            onClick={() => {
+              const logoutAction = logoutUserAPI();
+              dispatch(logoutAction);
+              const resetCheckAction = resetCheck();
+              dispatch(resetCheckAction);
+            }}
+          >
+            Logout
+          </Link>
+        </Menu.Item>
+      </Menu.ItemGroup>
     </Menu>
   );
 
@@ -83,7 +137,7 @@ export default function NavBar({ visible}) {
 
           <a className="common-link">
             <Dropdown
-              overlay={menu}
+              overlay={isLoggedin ? menu2 : menu}
               arrow={{ pointAtRight: true }}
               placement="bottom"
             >

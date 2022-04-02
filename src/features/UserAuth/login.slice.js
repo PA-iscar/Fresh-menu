@@ -49,6 +49,7 @@ const loginSlice = createSlice({
         state.user = {};
         state.isLoading = false;
         state.isError = false;
+        window.alert("Logged Out");
       })
       .addCase(logoutUserAPI.rejected, (state) => {
         saveLocalData("isLoggedin", false);
