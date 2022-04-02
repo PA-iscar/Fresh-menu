@@ -21,8 +21,11 @@ import {
 import { CgPaypal } from "react-icons/cg";
 import { FaCcAmazonPay } from "react-icons/fa";
 import NavBar from "../FoodItem/Navbar/NavBar";
+import { loadLocalData } from "../LocalStorage/localStorage";
 
 export const Checkout = () => {
+  const totalAmount=loadLocalData("total");
+  const meals=loadLocalData("meals")
   const [check, setCheck] = useState(false);
   function handleSubmit() {
     alert("Payment Successful...!");
@@ -42,7 +45,7 @@ export const Checkout = () => {
                   </span>{" "}
                   Logged In As
                 </h2>
-                <p className={styles.mailColor}>name@gmail.com</p>
+                <p className={styles.mailColor}>abhishek@gmail.com</p>
               </div>
               <div className={styles.rightOne}>
                 <h3 className={styles.orange}>Details</h3>{" "}
@@ -199,7 +202,7 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹75
+                            PLACE ORDER. ₹{totalAmount}
                           </button>
                         </div>
                       </TabPanel>
@@ -215,7 +218,7 @@ export const Checkout = () => {
                               className={styles.savebtn}
                               onClick={() => handleSubmit()}
                             >
-                              PLACE ORDER. ₹75
+                              PLACE ORDER. ₹{totalAmount}
                             </button>
                           </p>
                         </div>
@@ -275,7 +278,7 @@ export const Checkout = () => {
                                 style={{ marginLeft: "15px" }}
                                 onClick={() => handleSubmit()}
                               >
-                                PLACE ORDER. ₹75
+                                PLACE ORDER. ₹{totalAmount}
                               </button>
                             </p>
                           </div>
@@ -309,7 +312,7 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹75
+                            PLACE ORDER. ₹{totalAmount}
                           </button>
                         </p>
                       </TabPanel>
@@ -355,7 +358,7 @@ export const Checkout = () => {
                               style={{ marginLeft: "15px" }}
                               onClick={() => handleSubmit()}
                             >
-                              PLACE ORDER. ₹75
+                              PLACE ORDER. ₹{totalAmount}
                             </button>
                           </p>
                         </form>
@@ -442,7 +445,7 @@ export const Checkout = () => {
                             className={styles.savebtn}
                             onClick={() => handleSubmit()}
                           >
-                            PLACE ORDER. ₹75
+                            PLACE ORDER. ₹{totalAmount}
                           </button>
                         </p>
                       </TabPanel>
@@ -467,19 +470,22 @@ export const Checkout = () => {
               <h2 className={styles.gray}>Your Order</h2>
               {/* <div>Put slider here</div> */}
               <hr />
-              <div className={styles.foodName}>
+              {meals.map((m)=>{
+                return  <div className={styles.foodName}>
                 <p>
                   <span>
                     <RiRadioButtonLine style={{ color: "green" }} />
                   </span>{" "}
-                  &nbsp; Mexican-Burrito Bowl
+                  &nbsp; {m.name}
                 </p>
                 <div className={styles.number}>
                   <span className={styles.minus}>-</span>
-                  <input type="text" value="1" className={styles.cartInput} />
+                  <input type="text" value={m.count} className={styles.cartInput} />
                   <span className={styles.plus}>+</span>
                 </div>
               </div>
+              })}
+             
               <div className={styles.freshPass}>
                 <div className={styles.leftPass}>
                   <p>FRESHPASS</p>
@@ -531,11 +537,11 @@ export const Checkout = () => {
                   </p>
                 </div>
                 <div className={styles.priceIndivTwo}>
-                  <p>₹75.00</p>
+                  <p>₹{totalAmount}.00</p>
                   <p className={styles.mailColor}>+ ₹20.00</p>
-                  <p>+ ₹6.95</p>
-                  <p className={styles.mailColor}>+ ₹3.48</p>
-                  <p className={styles.mailColor}>+ ₹3.48</p>
+                  <p>+ ₹{totalAmount*0.05}</p>
+                  <p className={styles.mailColor}>+ ₹{totalAmount*0.025}</p>
+                  <p className={styles.mailColor}>+ ₹{totalAmount*0.025}</p>
                 </div>
               </div>
               <hr />
@@ -546,7 +552,7 @@ export const Checkout = () => {
                     Payable
                   </h2>
                 </div>
-                <div className={styles.priceIndivTwo}>₹108.00</div>
+                <div className={styles.priceIndivTwo}>₹{totalAmount+totalAmount*0.05+totalAmount*0.025+totalAmount*0.025}</div>
               </div>
             </div>
 

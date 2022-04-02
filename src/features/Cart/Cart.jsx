@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveLocalData,loadLocalData } from "../LocalStorage/localStorage";
+import { useNavigate } from "react-router-dom";
 import { getCartAPI } from "./cart.api";
 
 const Cart = ({ visible, setVisible }) => {
   var cartItems=loadLocalData("cart");
+  const totalAmount=loadLocalData("total")
   const [count, setCount] = useState(0);
   const [total,setTotal]=useState(0);
   const user = useSelector((state) => state.login.user);
@@ -15,6 +17,7 @@ const Cart = ({ visible, setVisible }) => {
   const onClose = () => {
     setVisible(false);
   };
+  const navigate = useNavigate()
 
   useEffect(()=>{
     const mealData=loadLocalData("meals");
@@ -25,7 +28,8 @@ const Cart = ({ visible, setVisible }) => {
       return tot + arr.count;
     },0);
    saveLocalData("cart",items);
-   cartItems=loadLocalData("cart")
+   cartItems=loadLocalData("cart");
+   saveLocalData("total",result)
     setTotal(result);
     console.log("meals",mealData);
     setMeals(mealData)
@@ -102,8 +106,18 @@ const Cart = ({ visible, setVisible }) => {
               
             
             <div className="proceed">
-              <button className="proceed-btn">
+
+              {/* <button className="proceed-btn">
+                Place Order &nbsp; · &nbsp; ₹ {total} */}
+
+              <button
+                className="proceed-btn"
+                onClick={() => {
+                navigate("/checkout")
+                }}
+              >
                 Place Order &nbsp; · &nbsp; ₹ {total}
+
               </button>
               <div className="safe_delivery">
                 <div className="safe_meals">

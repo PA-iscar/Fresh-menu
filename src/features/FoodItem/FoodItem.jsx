@@ -167,7 +167,7 @@ export default function FoodItem() {
                 <div className="ingredients-title">INGREDIENTS</div>
                 <div className="ingredients-list">
                   <div>
-                    {meal.ingredients.join(",")}
+                    {meal.ingredients && meal.ingredients.join(',')}
                     {/* Chicken, focaccia bread loaf, lettuce, onion, parsley,
                     mayonnaise, beetroot, tikka seasoning, garlic, green chilli,
                     red and white cabbage, green bell pepper, carrot, cheese

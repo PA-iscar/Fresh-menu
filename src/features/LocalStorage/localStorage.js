@@ -14,6 +14,6 @@ function saveLocalData(key, data) {
 
 saveLocalData("cart",0);
 saveLocalData("meals",[]);
-// saveLocalData("total",0);
+saveLocalData("total",0);
 
 export { loadLocalData, saveLocalData };
