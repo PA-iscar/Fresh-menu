@@ -8,18 +8,18 @@ import { getMealAPI } from "./foodItem.api";
 import Cart from "../Cart/Cart";
 import { GoPrimitiveDot } from "react-icons/go";
 import Footer from "../Footer/Footer";
-import { saveLocalData,loadLocalData } from "../LocalStorage/localStorage";
+import { saveLocalData, loadLocalData } from "../LocalStorage/localStorage";
 import Item from "antd/lib/list/Item";
 
 export default function FoodItem() {
   const [visible, setVisible] = useState(false);
   const [count, setCount] = useState(0);
-  const [foodArray,setFoodArray]=useState([]);
+  const [foodArray, setFoodArray] = useState([]);
   const location = useLocation();
   const dispatch = useDispatch();
 
   const meal = useSelector((state) => state.meal.singleMeal);
-  const meals=useSelector((state)=>state.meal.meals);
+  const meals = useSelector((state) => state.meal.meals);
   const isLoading = useSelector((state) => state.meal.isLoading);
 
   useEffect(() => {
@@ -28,31 +28,32 @@ export default function FoodItem() {
   }, []);
 
   const showDrawer = (count) => {
-    console.log("show")
-    let arr=loadLocalData("meals");
-      if(arr.filter(e => e.name === meal.name).length > 0){
-        const newArray=arr.map((a)=>{
-          if(a._id==meal._id){
-            a.count=count;
-            a.total=count*meal.price;
-            return a
-          }
-          return a
-        })
-        saveLocalData("meals",newArray);
-        console.log("new",newArray)
-      }else{
-        var obj=Object.assign({}, meal, {count:count},{total:count*meal.price})
+    console.log("show");
+    let arr = loadLocalData("meals");
+    if (arr.filter((e) => e.name === meal.name).length > 0) {
+      const newArray = arr.map((a) => {
+        if (a._id == meal._id) {
+          a.count = count;
+          a.total = count * meal.price;
+          return a;
+        }
+        return a;
+      });
+      saveLocalData("meals", newArray);
+      console.log("new", newArray);
+    } else {
+      var obj = Object.assign(
+        {},
+        meal,
+        { count: count },
+        { total: count * meal.price }
+      );
       arr.push(obj);
-      saveLocalData("meals",arr);
-      console.log("arr",arr);
-      }
-      
-  
-     
-    
+      saveLocalData("meals", arr);
+      console.log("arr", arr);
+    }
+
     setVisible(true);
-   
   };
   const onClose = () => {
     setVisible(false);
@@ -61,8 +62,6 @@ export default function FoodItem() {
     if (count === 0) {
       setVisible(false);
     }
-     
-  
   }, [count]);
   return (
     <>
@@ -74,41 +73,50 @@ export default function FoodItem() {
           <div className="product">
             <div className="image_social_container">
               <div className="image">
-                <img
-                  src={meal.image}
-                  alt=""
-                />
+                <img src={meal.image} alt="" />
               </div>
             </div>
             <div className="info">
               <h1>{meal.name}</h1>
               <div className="tags">
-                
-                  {/* <img
+                {/* <img
                     height={16}
                     width={16}
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr0_z0XU09IQKQ6w-T9_zCt08nYCrpm-gWOw&usqp=CAU"
                     alt=""
                   /> */}
-                 {meal.category==="Vegetarian"?<GoPrimitiveDot
-                style={{
-                  border: "1px solid",
-                  color: "green",
-                  marginRight: "5px",
-                  marginBottom:"-2px"
-                }}
-              />:<GoPrimitiveDot
-              style={{
-                border: "1px solid",
-                color: "red",
-                marginRight: "5px",
-                marginBottom:"-2px"
-              }}
-            />} 
-                
+                {meal.type === "Veg" ? (
+                  <GoPrimitiveDot
+                    style={{
+                      border: "1px solid",
+                      fontSize: "14px",
+                      color: "limegreen",
+                      marginRight: "5px",
+                    }}
+                  />
+                ) : meal.type === "Non Veg" ? (
+                  <GoPrimitiveDot
+                    style={{
+                      border: "1px solid",
+                      fontSize: "14px",
+                      color: "red",
+                      marginRight: "5px",
+                    }}
+                  />
+                ) : (
+                  <GoPrimitiveDot
+                    style={{
+                      border: "1px solid",
+                      fontSize: "14px",
+                      color: "brown",
+                      marginRight: "5px",
+                    }}
+                  />
+                )}
+
                 <span className="category">
                   <Link to="/" className="cuisine">
-                  {meal.cuisine}
+                    {meal.cuisine}
                   </Link>
                 </span>
                 {/* <span>Available</span> */}
@@ -130,14 +138,20 @@ export default function FoodItem() {
                 <div className="order">
                   <div
                     className="order_calc"
-                    onClick={() => {setCount(count - 1);showDrawer(count-1)}}
+                    onClick={() => {
+                      setCount(count - 1);
+                      showDrawer(count - 1);
+                    }}
                   >
                     -
                   </div>
                   <div className="order_result">{count}</div>
                   <div
                     className="order_calc"
-                    onClick={() => {setCount(count + 1);showDrawer(count+1)}}
+                    onClick={() => {
+                      setCount(count + 1);
+                      showDrawer(count + 1);
+                    }}
                   >
                     +
                   </div>
@@ -155,11 +169,19 @@ export default function FoodItem() {
                 </div>
                 <div className="food_tags">
                   <div className="cuisines">
-                    {meal.category!=="Vegetarian"?  <> <img src="https://www.freshmenu.com/pages/product/images/category_icons/icn-non-veg.svg" />
-                    <div className="cuisines_text">Non Veg</div></> :  <>  <img src="https://www.freshmenu.com/pages/product/images/category_icons/icn-veg.svg" />
-                    <div className="cuisines_text">Veg</div></>
-                    }
-                
+                    {meal.type !== "Veg" ? (
+                      <>
+                        {" "}
+                        <img src="https://www.freshmenu.com/pages/product/images/category_icons/icn-non-veg.svg" />
+                        <div className="cuisines_text">Non Veg</div>
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        <img src="https://www.freshmenu.com/pages/product/images/category_icons/icn-veg.svg" />
+                        <div className="cuisines_text">Veg</div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -167,7 +189,7 @@ export default function FoodItem() {
                 <div className="ingredients-title">INGREDIENTS</div>
                 <div className="ingredients-list">
                   <div>
-                    {meal.ingredients && meal.ingredients.join(',')}
+                    {meal.ingredients && meal.ingredients.join(",")}
                     {/* Chicken, focaccia bread loaf, lettuce, onion, parsley,
                     mayonnaise, beetroot, tikka seasoning, garlic, green chilli,
                     red and white cabbage, green bell pepper, carrot, cheese

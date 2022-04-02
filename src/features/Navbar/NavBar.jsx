@@ -18,8 +18,10 @@ import UserAuth from "../UserAuth/UserAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAPI } from "../UserAuth/auth.api";
 import { resetCheck } from "../UserAuth/check.slice";
+import { loadLocalData } from "../LocalStorage/localStorage";
 
 export default function NavBar() {
+  const count = loadLocalData("cart")
   const [feature, setFeature] = useState("");
   const isLoggedin = useSelector((state) => state.login.isLoggedin);
   const dispatch = useDispatch();
@@ -168,9 +170,17 @@ export default function NavBar() {
                   <UserOutlined />
                 </Dropdown>
               </Link>
-              <Link className="common-link" to="">
-                <ShoppingCartOutlined />
-              </Link>
+              {count === 0 ? (
+                <a className="common-link">
+                  <span className="cartCount"></span>
+                  <ShoppingCartOutlined />
+                </a>
+              ) : (
+                <a className="common_cart_link">
+                  <span className="cartCount">{count}</span>
+                  <ShoppingCartOutlined />
+                </a>
+              )}
             </div>
           </div>
         </div>

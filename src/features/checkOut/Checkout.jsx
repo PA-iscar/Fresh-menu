@@ -22,13 +22,16 @@ import { CgPaypal } from "react-icons/cg";
 import { FaCcAmazonPay } from "react-icons/fa";
 import NavBar from "../FoodItem/Navbar/NavBar";
 import { loadLocalData } from "../LocalStorage/localStorage";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Checkout = () => {
   const totalAmount = loadLocalData("total");
   const meals = loadLocalData("meals");
   const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
   function handleSubmit() {
     alert("Payment Successful...!");
+    navigate("/");
   }
   return (
     <>

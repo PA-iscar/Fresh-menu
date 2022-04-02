@@ -145,7 +145,7 @@ export default function NavBar({ visible }) {
             </Dropdown>
           </a>
 
-          {count == 0 ? (
+          {count === 0 ? (
             <a className="common-link">
               <span className="cartCount"></span>
               <ShoppingCartOutlined />
